@@ -1,10 +1,22 @@
 angular
-    .module('helloWorldApp', ['ngRoute'])
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/home.html',
-                controller: 'HomeCtrl'
-            })
+    .module('usersApp', ['ui.router'])
+    .config(['$stateProvider', function ($stateProvider) {
+        var users = {
+            name: 'hello',
+            url: '/',
+            templateUrl: 'views/users.html',
+            controller: 'usersController'
+        }
+
+        var userDetails = {
+            name: 'about',
+            url: '/user-details',
+            templateUrl: 'views/user-details.html',
+            controller: 'usersDetailsController'
+        }
+
+        $stateProvider.state(users);
+        $stateProvider.state(userDetails);
+
     }
     ])

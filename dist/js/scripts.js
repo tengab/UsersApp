@@ -36696,17 +36696,36 @@ function ngViewFillContentFactory($compile, $controller, $route) {
 })(window, window.angular);
 
 angular
-    .module('helloWorldApp', ['ngRoute'])
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider
-            .when('/', {
-                templateUrl: 'views/home.html',
-                controller: 'HomeCtrl'
-            })
+    .module('usersApp', ['ui.router'])
+    .config(['$stateProvider', function ($stateProvider) {
+        var users = {
+            name: 'hello',
+            url: '/',
+            templateUrl: 'views/users.html',
+            controller: 'usersController'
+        }
+
+        var userDetails = {
+            name: 'about',
+            url: '/user-details',
+            templateUrl: 'views/user-details.html',
+            controller: 'usersDetailsController'
+        }
+
+        $stateProvider.state(users);
+        $stateProvider.state(userDetails);
+
     }
     ])
-angular.module('helloWorldApp')
-    .controller('HomeCtrl', ['$scope', function ($scope) {
-        $scope.message = 'Hello World!'
-    }
-    ])
+var usersApp = angular.module('usersApp')
+
+
+usersApp.controller('usersController', ['$scope', function ($scope) {
+    $scope.message = 'Hello Users!'
+}
+])
+
+usersApp.controller('usersDetailsController', ['$scope', function ($scope) {
+    $scope.message = 'Hello User detail!'
+}
+])
