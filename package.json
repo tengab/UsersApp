@@ -10,8 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@uirouter/angularjs": "^1.0.18",
-    "angular": "^1.7.2",
-    "angular-route": "^1.7.2",
+    "angular": "1.4.14",
     "gulp": "^3.9.1"
   },
   "devDependencies": {
