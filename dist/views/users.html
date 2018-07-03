@@ -1,7 +1,8 @@
 <h1>{{ message }}</h1>
 
-<ul>
-    <li ng-repeat='user in users'>
-        {{ user.name.first }}
-    </li>
-</ul>
+
+
+<div ng-controller="usersController as $ctrl">
+    <div id="grid1" ui-grid="gridOptions" class="grid"> </div>
+</div>
+
