@@ -1,4 +1,3 @@
-usersApp.controller('usersDetailsController', ['$scope', function ($scope) {
-    $scope.message = 'Hello User detail!'
-}
-])
+usersApp.controller('usersDetailsController', ['$scope', function ($scope) { // eslint-disable-line
+    $scope.message = 'Hello User detail!';
+}]);

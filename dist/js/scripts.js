@@ -29850,133 +29850,83 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-var usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.autoResize'])
+const usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.autoResize']);
 
+usersApp.config(['$stateProvider', ($stateProvider) => {
 
-usersApp.config(['$stateProvider', function ($stateProvider) {
-
-    var users = {
+    $stateProvider.state({
         name: 'users',
         url: '/',
         templateUrl: 'views/users.html',
         controller: 'usersController'
-    }
-
-    var userDetails = {
+    })
+    .state({
         name: 'user-details',
         url: '/user-details/:id',
         templateUrl: 'views/user-details.html',
-        controller: function ($scope, $stateParams) {
-            console.log($stateParams)
-
-            $scope.id = $stateParams.id
-            console.log($scope)
+        controller: ($scope, $stateParams) => {
+            $scope.id = $stateParams.id;
         }
-    }
-
-    $stateProvider.state(users);
-    $stateProvider.state(userDetails);
-
+    });
 }
-])
+]);
 
-usersApp.service('passingUserService', function ($http) {
-   
-var something = this
+usersApp.service('passingUserService', function ($http) { // eslint-disable-line
 
-    
-      this.userArray = $http({
+    this.userArray = $http({
         method: 'GET',
         url: 'https://randomuser.me/api/?results=10'
-    }).then(function (response) {
+    }).then((response) => {
 
-        let gridData = response.data.results
+        const gridData = response.data.results;
 
-        let gridInput = gridData.map((el) => {
-            let rowObject = {}
-            rowObject.thumbnail = el.picture.thumbnail
-            rowObject.largePicture = el.picture.large
-            rowObject.firstName = el.name.first.charAt(0).toUpperCase() + el.name.first.slice(1)
-            rowObject.lastName = el.name.last.charAt(0).toUpperCase() + el.name.last.slice(1)
-            rowObject.age = el.dob.age
-            rowObject.gender = el.gender
-            rowObject.id = el.login.uuid
-            return rowObject
-        })
-       return gridInput
+        const gridInput = gridData.map((el) => {
+            const rowObject = {};
+            rowObject.thumbnail = el.picture.thumbnail;
+            rowObject.largePicture = el.picture.large;
+            rowObject.firstName = el.name.first.charAt(0).toUpperCase() + el.name.first.slice(1);
+            rowObject.lastName = el.name.last.charAt(0).toUpperCase() + el.name.last.slice(1);
+            rowObject.age = el.dob.age;
+            rowObject.gender = el.gender;
+            rowObject.id = el.login.uuid;
+            return rowObject;
+        });
+        return gridInput;
     },
-        function (error) {
-            console.log('data ' + data)
-            console.log('status ' + status)
-        })
-       
-})
-usersApp.controller('usersDetailsController', ['$scope', function ($scope) {
-    $scope.message = 'Hello User detail!'
-}
-])
-var usersApp = angular.module('usersApp')
+    (error) => {});
+});
+usersApp.controller('usersDetailsController', ['$scope', function ($scope) { // eslint-disable-line
+    $scope.message = 'Hello User detail!';
+}]);
+usersApp.controller('usersController', ['$scope', '$http', 'passingUserService', function ($scope, $http, passingUserService) { // eslint-disable-line
+    $scope.message = 'Users list';
+    $scope.users = [];
+    $scope.image = '';
 
+    $scope.cellClicked = (row, col) => {
+        console.log('userDataObject',row.entity);
+    };
 
-usersApp.controller('usersController', ['$scope', '$http', 'passingUserService', function ($scope, $http, passingUserService) {
-    $scope.message = 'Users list'
-    $scope.users = []
-    $scope.image = ''
+    $scope.passingUserService = passingUserService.userArray;
 
-    $scope.cellClicked = function (row, col) {
-        console.log(row.entity)
-    }
-
-    $scope.passingUserService = passingUserService.userArray
-
-    console.log('from service', $scope.passingUserService)
+    $scope.passingUserService.then((data) => {
+        $scope.gridOptions = {
+            data
+        };
+    });
 
     $scope.gridOptions = {
         enableSorting: true,
         rowHeight: 50,
         columnDefs: [
-            { field: 'thumbnail', enableSorting: false, cellClass: 'thumbnailCell', cellTemplate: "<img ng-src=\"{{grid.getCellValue(row, col)}}\">" },
+            { field: 'thumbnail', enableSorting: false, cellClass: 'thumbnailCell', cellTemplate: '<img ng-src=\'{{grid.getCellValue(row, col)}}\'>' },
             { field: 'firstName', enableSorting: false, cellClass: 'thumbnailCell' },
-            { field: 'lastName', enableSorting: false, cellClass: 'thumbnailCell', cellTemplate: '<div ng-click="grid.appScope.cellClicked(row,col)" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
+            { field: 'lastName',
+                enableSorting: false,
+                cellClass: 'thumbnailCell',
+                cellTemplate: '<div ng-click="grid.appScope.cellClicked(row,col)" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
             { field: 'age', enableSorting: false, cellClass: 'thumbnailCell' },
             { field: 'gender', cellClass: 'thumbnailCell' }
-        ],
-
+        ]
     };
-
-
-
-    $http({
-        method: 'GET',
-        url: 'https://randomuser.me/api/?results=10'
-    }).then(function (response) {
-
-        let gridData = response.data.results
-
-        let gridInput = gridData.map((el) => {
-            let rowObject = {}
-            rowObject.thumbnail = el.picture.thumbnail
-            rowObject.largePicture = el.picture.large
-            rowObject.firstName = el.name.first.charAt(0).toUpperCase() + el.name.first.slice(1)
-            rowObject.lastName = el.name.last.charAt(0).toUpperCase() + el.name.last.slice(1)
-            rowObject.age = el.dob.age
-            rowObject.gender = el.gender
-            rowObject.id = el.login.uuid
-            return rowObject
-        })
-
-        $scope.users = gridInput
-        $scope.gridOptions = {
-            data: gridInput
-        };
-    },
-        function (error) {
-            console.log('data ' + data)
-            console.log('status ' + status)
-        })
-
-}
-])
-
-
-
+}]);
