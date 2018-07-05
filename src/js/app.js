@@ -1,4 +1,4 @@
-const usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.autoResize']);
+const usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.autoResize', 'ngMap']);
 
 usersApp.config(['$stateProvider', ($stateProvider) => {
 
