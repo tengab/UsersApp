@@ -29854,6 +29854,7 @@ const usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.au
 
 usersApp.config(['$stateProvider', ($stateProvider) => {
 
+
     $stateProvider.state({
         name: 'users',
         url: '/',
@@ -29864,9 +29865,7 @@ usersApp.config(['$stateProvider', ($stateProvider) => {
         name: 'user-details',
         url: '/user-details/:id',
         templateUrl: 'views/user-details.html',
-        controller: ($scope, $stateParams) => {
-            $scope.id = $stateParams.id;
-        }
+        controller: 'userDetailsController'
     });
 }
 ]);
@@ -29875,7 +29874,7 @@ usersApp.service('passingUserService', function ($http) { // eslint-disable-line
 
     this.userArray = $http({
         method: 'GET',
-        url: 'https://randomuser.me/api/?results=10'
+        url: 'https://randomuser.me/api/?results=10&nat=US&seed=abc'
     }).then((response) => {
 
         const gridData = response.data.results;
@@ -29888,34 +29887,18 @@ usersApp.service('passingUserService', function ($http) { // eslint-disable-line
             rowObject.lastName = el.name.last.charAt(0).toUpperCase() + el.name.last.slice(1);
             rowObject.age = el.dob.age;
             rowObject.gender = el.gender;
-            rowObject.id = el.login.uuid;
+            rowObject.id = el.id.value;
             return rowObject;
         });
         return gridInput;
     },
     (error) => {});
 });
-usersApp.controller('usersDetailsController', ['$scope', function ($scope) { // eslint-disable-line
-    $scope.message = 'Hello User detail!';
-}]);
-usersApp.controller('usersController', ['$scope', '$http', 'passingUserService', function ($scope, $http, passingUserService) { // eslint-disable-line
-    $scope.message = 'Users list';
-    $scope.users = [];
-    $scope.image = '';
 
-    $scope.cellClicked = (row, col) => {
-        console.log('userDataObject',row.entity);
-    };
-
-    $scope.passingUserService = passingUserService.userArray;
-
-    $scope.passingUserService.then((data) => {
-        $scope.gridOptions = {
-            data
-        };
-    });
-
-    $scope.gridOptions = {
+usersApp.service('idService', function () { // eslint-disable-line
+        
+      this.gridUpdate = 
+    {
         enableSorting: true,
         rowHeight: 50,
         columnDefs: [
@@ -29924,9 +29907,51 @@ usersApp.controller('usersController', ['$scope', '$http', 'passingUserService',
             { field: 'lastName',
                 enableSorting: false,
                 cellClass: 'thumbnailCell',
-                cellTemplate: '<div ng-click="grid.appScope.cellClicked(row,col)" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
+                cellTemplate: '<a ng-click="grid.appScope.cellClicked(row,col)" ui-sref="user-details({id: row.entity.id })" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</a>' },
             { field: 'age', enableSorting: false, cellClass: 'thumbnailCell' },
             { field: 'gender', cellClass: 'thumbnailCell' }
         ]
+        
     };
+    
+  
+   
+});
+
+// apiKey: ('AIzaSyByYJ0xFVKhi5Ro8jp1600xtlI5bFr8VnE')
+usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'passingUserService', 'idService', function ($scope, $http, $stateParams, passingUserService, idService) { // eslint-disable-line
+
+    console.log('stateParams', $stateParams.id)
+
+    
+    $http({
+        method: 'GET',
+        url: `https://randomuser.me/api/?nat=US&id=${$stateParams.id}`
+    }).then((data) => {
+                // console.log('USEROBJECT', data.data.results[0]);
+
+                $scope.fetchedUser = data.data.results[0]
+                console.log('fetchedUser', $scope.fetchedUser)
+            });
+   
+
+}]);
+usersApp.controller('usersController', ['$scope', '$http', '$stateParams', 'passingUserService', 'idService', function ($scope, $http, $stateParams, passingUserService, idService) { // eslint-disable-line
+
+    
+    
+    
+    $scope.cellClicked = (row, col) => {
+        console.log('userDataObject', row.entity.id);
+    };
+    
+    $scope.passingUserService = passingUserService.userArray;
+
+    $scope.passingUserService.then((data) => {
+        $scope.gridOptions = {
+            data
+        };
+    });
+
+    $scope.gridOptions = idService.gridUpdate
 }]);

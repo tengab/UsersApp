@@ -1,2 +1,38 @@
-<h1> HELLO USERS LIST</h1>
-<h2>{{ message }}</h2>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">User panel</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-4 row-custom-photo">
+                <img src={{fetchedUser.picture.large}} />
+            </div>
+            <div class="col-xs-8 row-custom-details">
+                <div>
+                    <strong>
+                        <span>{{fetchedUser.name.title.charAt(0).toUpperCase() + fetchedUser.name.title.slice(1)}} {{fetchedUser.name.first.charAt(0).toUpperCase()
+                            + fetchedUser.name.first.slice(1)}} {{fetchedUser.name.last.charAt(0).toUpperCase() + fetchedUser.name.last.slice(1)}}</span>
+                    </strong>
+                    <br />
+                    <div>gender: {{fetchedUser.gender === "male" ? '♂' : fetchedUser.gender === "female" ? '♀' : ''}}</div>
+
+                    email:
+                    <strong>{{fetchedUser.email}}</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">User panel</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-xs-12">
+
+            </div>
+        </div>
+    </div>
+</div>

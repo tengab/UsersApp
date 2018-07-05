@@ -10,3 +10,33 @@ html, body {
 .thumbnailCell {
     text-align: center;
    }
+
+.row-custom {
+    display: flex;
+    justify-content: center;
+    
+     
+   }
+
+   .row-custom span {
+       font-size: 1.8em;
+   }
+
+.row-custom-photo {
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+   }
+
+   .row {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+   }
+
+   
+ 

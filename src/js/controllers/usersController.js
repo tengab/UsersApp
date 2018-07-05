@@ -1,12 +1,12 @@
-usersApp.controller('usersController', ['$scope', '$http', 'passingUserService', function ($scope, $http, passingUserService) { // eslint-disable-line
-    $scope.message = 'Users list';
-    $scope.users = [];
-    $scope.image = '';
+usersApp.controller('usersController', ['$scope', '$http', '$stateParams', 'passingUserService', 'idService', function ($scope, $http, $stateParams, passingUserService, idService) { // eslint-disable-line
 
+    
+    
+    
     $scope.cellClicked = (row, col) => {
-        console.log('userDataObject',row.entity);
+        console.log('userDataObject', row.entity.id);
     };
-
+    
     $scope.passingUserService = passingUserService.userArray;
 
     $scope.passingUserService.then((data) => {
@@ -15,18 +15,5 @@ usersApp.controller('usersController', ['$scope', '$http', 'passingUserService',
         };
     });
 
-    $scope.gridOptions = {
-        enableSorting: true,
-        rowHeight: 50,
-        columnDefs: [
-            { field: 'thumbnail', enableSorting: false, cellClass: 'thumbnailCell', cellTemplate: '<img ng-src=\'{{grid.getCellValue(row, col)}}\'>' },
-            { field: 'firstName', enableSorting: false, cellClass: 'thumbnailCell' },
-            { field: 'lastName',
-                enableSorting: false,
-                cellClass: 'thumbnailCell',
-                cellTemplate: '<div ng-click="grid.appScope.cellClicked(row,col)" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</div>' },
-            { field: 'age', enableSorting: false, cellClass: 'thumbnailCell' },
-            { field: 'gender', cellClass: 'thumbnailCell' }
-        ]
-    };
+    $scope.gridOptions = idService.gridUpdate
 }]);
