@@ -1,8 +1,15 @@
+<a class='btn btn-primary' ui-sref="users">Indietro</a>
+
+<h1>USER DETAILS</h1>
+
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">User panel</h3>
+        <h3 class="panel-title">
+            <strong>User info</strong> 
+        </h3>
+        <span data-toggle="collapse" data-target="#user-details-panel" class='glyphicon' ng-class="{'glyphicon-chevron-up':!isInfoHidden, 'glyphicon-chevron-down':isInfoHidden}" ng-click="isInfoHidden=!isInfoHidden"> </span>
     </div>
-    <div class="panel-body">
+    <div class="panel-body in" id="user-details-panel">
         <div class="row">
             <div class="col-xs-4 row-custom-photo">
                 <img src={{fetchedUser.picture.large}} />
@@ -15,7 +22,6 @@
                     </strong>
                     <br />
                     <div>gender: {{fetchedUser.gender === "male" ? '♂' : fetchedUser.gender === "female" ? '♀' : ''}}</div>
-
                     email:
                     <strong>{{fetchedUser.email}}</strong>
                 </div>
@@ -26,14 +32,16 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Location</h3>
+        <h3 class="panel-title">
+            <strong>Location</strong>
+        </h3>
+        <span data-toggle="collapse" data-target="#user-map-panel" class='glyphicon' ng-class="{'glyphicon-chevron-up':!isMapHidden, 'glyphicon-chevron-down':isMapHidden}" ng-click="isMapHidden=!isMapHidden"> </span>
     </div>
-    <div class="panel-body">
+    <div class="panel-body in" id="user-map-panel">
         <div class="row">
             <div class="col-xs-12">
-                {{lat}} , {{lng}}
-                <ng-map zoom="2" center="[{{lat}},{{lng}}]">
-                    <marker position="[{{lat}},{{lng}}]" centered='true'/>
+                <ng-map zoom="3" center="[{{lat}},{{lng}}]">
+                    <marker position="[{{lat}},{{lng}}]" centered='true' />
                 </ng-map>
             </div>
         </div>

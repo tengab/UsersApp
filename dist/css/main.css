@@ -18,6 +18,7 @@ html, body {
      
    }
 
+   
    .row-custom span {
        font-size: 1.8em;
    }
@@ -35,8 +36,11 @@ html, body {
     list-style: none;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
-   }
+    }
 
-   .angular-google-map-container { height: 400px; }
+    .panel-heading{
+        display: flex;
+        justify-content: space-between
+
+    }
  
