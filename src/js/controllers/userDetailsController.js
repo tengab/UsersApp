@@ -1,4 +1,4 @@
-usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'passingUserService', function ($scope, $http, $stateParams, passingUserService) { // eslint-disable-line
+usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'passingUserService', function($scope, $http, $stateParams, passingUserService) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     $http({
         method: 'GET',
@@ -16,3 +16,4 @@ usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams',
         $scope.lng = $scope.fetchedUser.location.coordinates.longitude;
     });
 }]);
+

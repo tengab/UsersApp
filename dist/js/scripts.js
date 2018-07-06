@@ -29850,10 +29850,9 @@ $provide.value("$locale", {
 })(window, document);
 
 !window.angular.$$csp().noInlineStyle && window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
-const usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.autoResize', 'ngMap']);
+const usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.autoResize', 'ui.grid.grouping', 'ngMap']);
 
-usersApp.config(['$stateProvider', ($stateProvider) => {
-
+usersApp.config(['$stateProvider', function($stateProvider) {
 
     $stateProvider.state({
         name: 'users',
@@ -29869,9 +29868,66 @@ usersApp.config(['$stateProvider', ($stateProvider) => {
         });
 }
 ]);
+usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'passingUserService', function($scope, $http, $stateParams, passingUserService) { // eslint-disable-line prefer-arrow-callback, no-undef
+
+    $http({
+        method: 'GET',
+        url: 'https://randomuser.me/api/?results=10&nat=US&seed=a'
+    }).then((response) => {
+        const pointedUser = response.data.results;
+
+        for (let i = 0; i < pointedUser.length; i++) {
+            if (pointedUser[i].login.uuid === $stateParams.id) {
+                $scope.fetchedUser = pointedUser[i];
+            }
+        }
+
+        $scope.lat = $scope.fetchedUser.location.coordinates.latitude;
+        $scope.lng = $scope.fetchedUser.location.coordinates.longitude;
+    });
+}]);
 
 
-usersApp.service('passingUserService', function ($http) { // eslint-disable-line
+usersApp.controller('usersController', ['$scope', '$http', '$stateParams', 'passingUserService', function ($scope, $http, $stateParams, passingUserService) { // eslint-disable-line
+
+    $scope.gridOptions = { rowHeight: 50 };
+
+    $scope.gridOptions.onRegisterApi = (gridApi) => {
+        $scope.gridApi = gridApi;
+        $scope.gridApi.grid.registerDataChangeCallback(() => {
+            $scope.gridApi.treeBase.expandAllRows();
+        });
+    };
+
+    $scope.passingUserService = passingUserService.userArray;
+
+    passingUserService.userArray.then((data) => {
+
+        $scope.gridOptions = {
+            enableSorting: true,
+            rowHeight: 50,
+            columnDefs: [
+                { field: 'thumbnail', cellClass: 'thumbnailCell', cellTemplate: '<img ng-src=\'{{grid.getCellValue(row, col)}}\'>' },
+                { field: 'firstName', cellClass: 'thumbnailCell' },
+                {
+                    field: 'lastName',
+                    cellClass: 'thumbnailCell',
+                    cellTemplate: '<a ng-click="grid.appScope.cellClicked(row,col)" ui-sref="user-details({id: row.entity.id })" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</a>'
+                },
+                { field: 'age', cellClass: 'thumbnailCell' },
+                { field: 'gender', grouping: { groupPriority: 0 }, sort: { priority: 1, direction: 'asc' }, cellClass: 'thumbnailCell' }
+            ],
+            data
+        };
+        $scope.gridOptions.onRegisterApi = (gridApi) => {
+            $scope.gridApi = gridApi;
+            $scope.gridApi.grid.registerDataChangeCallback(() => {
+                $scope.gridApi.treeBase.expandAllRows();
+            });
+        };
+    });
+}]);
+usersApp.service('passingUserService', function($http) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     this.userArray = $http({
         method: 'GET',
@@ -29893,50 +29949,23 @@ usersApp.service('passingUserService', function ($http) { // eslint-disable-line
         return gridInput;
     },(error) => { });
 });
-usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'passingUserService', function ($scope, $http, $stateParams, passingUserService) { // eslint-disable-line
+usersApp.directive('userInfo', function() { // eslint-disable-line prefer-arrow-callback, no-undef
+    return {
+        restrict: 'AEC',
+        // template: '<h1> template </h1>',
+        templateUrl: 'directives/user-info.html',
+        replace: false
+    };
+});
 
-    $http({
-        method: 'GET',
-        url: 'https://randomuser.me/api/?results=10&nat=US&seed=a'
-    }).then((response) => {
-        const pointedUser = response.data.results;
-
-        for (let i = 0; i < pointedUser.length; i++) {
-            if (pointedUser[i].login.uuid === $stateParams.id) {
-                $scope.fetchedUser = pointedUser[i];
-            }
-        }
-
-        $scope.lat = $scope.fetchedUser.location.coordinates.latitude;
-        $scope.lng = $scope.fetchedUser.location.coordinates.longitude;
-    });
-}]);
-usersApp.controller('usersController', ['$scope', '$http', '$stateParams', 'passingUserService', function ($scope, $http, $stateParams, passingUserService) { // eslint-disable-line
-
-    $scope.gridOptions = { rowHeight: 50 };
-
-    $scope.passingUserService = passingUserService.userArray;
-
-    passingUserService.userArray.then((data) => {
-        $scope.gridOptions = {
-            enableSorting: true,
-            rowHeight: 50,
-            columnDefs: [
-                { field: 'thumbnail', enableSorting: false, cellClass: 'thumbnailCell', cellTemplate: '<img ng-src=\'{{grid.getCellValue(row, col)}}\'>' },
-                { field: 'firstName', enableSorting: false, cellClass: 'thumbnailCell' },
-                {
-                    field: 'lastName',
-                    enableSorting: false,
-                    cellClass: 'thumbnailCell',
-                    cellTemplate: '<a ng-click="grid.appScope.cellClicked(row,col)" ui-sref="user-details({id: row.entity.id })" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</a>'
-                },
-                { field: 'age', enableSorting: false, cellClass: 'thumbnailCell' },
-                { field: 'gender', cellClass: 'thumbnailCell' }
-            ],
-            data
-        };
-    });
-}]);
+usersApp.directive('userMap', function() { // eslint-disable-line prefer-arrow-callback, no-undef
+    return {
+        restrict: 'AEC',
+        // template: '<h1> template </h1>',
+        templateUrl: 'directives/user-map.html',
+        replace: false
+    };
+});
 !function(e,t){"object"==typeof exports?module.exports=t(require("angular")):"function"==typeof define&&define.amd?define(["angular"],t):t(e.angular)}(this,function(angular){/**
  * AngularJS Google Maps Ver. 1.18.4
  *

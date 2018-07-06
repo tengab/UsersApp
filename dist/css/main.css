@@ -4,43 +4,39 @@ html, body {
 
 .grid {
     width: auto;
-    height: 280
-    }
+  height: 650px;
+}
 
 .thumbnailCell {
-    text-align: center;
-   }
-
+    padding: 1px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+   
 .row-custom {
     display: flex;
     justify-content: center;
-    
-     
-   }
-
+}
    
-   .row-custom span {
-       font-size: 1.8em;
-   }
+.row-custom span {
+    font-size: 1.8em;
+}
 
 .row-custom-photo {
     text-align: center;
-
     display: flex;
     justify-content: center;
-   }
+}
 
-   .row {
+.row {
     padding: 0;
     margin: 0;
     list-style: none;
     display: flex;
     align-items: center;
-    }
-
+}
     .panel-heading{
-        display: flex;
-        justify-content: space-between
-
-    }
- 
+    display: flex;
+    justify-content: space-between
+}

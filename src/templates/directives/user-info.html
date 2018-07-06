@@ -1,0 +1,28 @@
+<div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <strong>User info</strong>
+            </h3>
+            <span data-toggle="collapse" data-target="#user-details-panel" class='glyphicon' ng-class="{'glyphicon-chevron-up':!isInfoHidden, 'glyphicon-chevron-down':isInfoHidden}"
+                ng-click="isInfoHidden=!isInfoHidden"> </span>
+        </div>
+        <div class="panel-body in" id="user-details-panel">
+            <div class="row">
+                <div class="col-xs-4 row-custom-photo">
+                    <img src={{fetchedUser.picture.large}} />
+                </div>
+                <div class="col-xs-8 row-custom-details">
+                    <div>
+                        <strong>
+                            <span>{{fetchedUser.name.title.charAt(0).toUpperCase() + fetchedUser.name.title.slice(1)}} {{fetchedUser.name.first.charAt(0).toUpperCase()
+                                + fetchedUser.name.first.slice(1)}} {{fetchedUser.name.last.charAt(0).toUpperCase() + fetchedUser.name.last.slice(1)}}</span>
+                        </strong>
+                        <br />
+                        <div>gender: {{fetchedUser.gender === "male" ? '♂' : fetchedUser.gender === "female" ? '♀' : ''}}</div>
+                        email:
+                        <strong>{{fetchedUser.email}}</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
