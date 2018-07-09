@@ -1,4 +1,4 @@
-usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'passingUserService', function($scope, $http, $stateParams, passingUserService) { // eslint-disable-line prefer-arrow-callback, no-undef
+usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     $http({
         method: 'GET',

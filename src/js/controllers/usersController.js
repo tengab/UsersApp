@@ -1,4 +1,4 @@
-usersApp.controller('usersController', ['$scope', '$http', '$stateParams', 'passingUserService', function ($scope, $http, $stateParams, passingUserService) { // eslint-disable-line
+usersApp.controller('usersController', ['$scope', 'passingUserService', function ($scope, passingUserService) { // eslint-disable-line
 
     $scope.gridOptions = { rowHeight: 50 };
 

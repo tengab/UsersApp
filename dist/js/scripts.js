@@ -29868,7 +29868,7 @@ usersApp.config(['$stateProvider', function($stateProvider) {
         });
 }
 ]);
-usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'passingUserService', function($scope, $http, $stateParams, passingUserService) { // eslint-disable-line prefer-arrow-callback, no-undef
+usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     $http({
         method: 'GET',
@@ -29888,7 +29888,7 @@ usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams',
 }]);
 
 
-usersApp.controller('usersController', ['$scope', '$http', '$stateParams', 'passingUserService', function ($scope, $http, $stateParams, passingUserService) { // eslint-disable-line
+usersApp.controller('usersController', ['$scope', 'passingUserService', function ($scope, passingUserService) { // eslint-disable-line
 
     $scope.gridOptions = { rowHeight: 50 };
 
@@ -29927,6 +29927,19 @@ usersApp.controller('usersController', ['$scope', '$http', '$stateParams', 'pass
         };
     });
 }]);
+usersApp.directive('userInfo', function() { // eslint-disable-line prefer-arrow-callback, no-undef
+    return {
+        restrict: 'AEC',
+        templateUrl: 'directives/user-info.html'
+    };
+});
+
+usersApp.directive('userMap', function() { // eslint-disable-line prefer-arrow-callback, no-undef
+    return {
+        restrict: 'AEC',
+        templateUrl: 'directives/user-map.html'
+    };
+});
 usersApp.service('passingUserService', function($http) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     this.userArray = $http({
@@ -29948,23 +29961,6 @@ usersApp.service('passingUserService', function($http) { // eslint-disable-line 
         });
         return gridInput;
     },(error) => { });
-});
-usersApp.directive('userInfo', function() { // eslint-disable-line prefer-arrow-callback, no-undef
-    return {
-        restrict: 'AEC',
-        // template: '<h1> template </h1>',
-        templateUrl: 'directives/user-info.html',
-        replace: false
-    };
-});
-
-usersApp.directive('userMap', function() { // eslint-disable-line prefer-arrow-callback, no-undef
-    return {
-        restrict: 'AEC',
-        // template: '<h1> template </h1>',
-        templateUrl: 'directives/user-map.html',
-        replace: false
-    };
 });
 !function(e,t){"object"==typeof exports?module.exports=t(require("angular")):"function"==typeof define&&define.amd?define(["angular"],t):t(e.angular)}(this,function(angular){/**
  * AngularJS Google Maps Ver. 1.18.4

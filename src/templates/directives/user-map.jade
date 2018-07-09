@@ -1,0 +1,10 @@
+.panel.panel-default
+    .panel-heading   
+        h3.panel-title
+            strong Location
+        span(data-toggle="collapse" data-target="#user-map-panel" class='glyphicon' ng-class="{'glyphicon-chevron-up':!isMapHidden, 'glyphicon-chevron-down':isMapHidden}" ng-click="isMapHidden=!isMapHidden")
+    .panel-body.in#user-map-panel
+         .row
+            .col-xs-12
+                ng-map.ng-map(zoom="3" center="[{{lat}},{{lng}}]")
+                    marker(position="[{{lat}},{{lng}}]" centered='true')
