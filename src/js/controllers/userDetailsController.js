@@ -2,7 +2,7 @@ usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams',
 
     $http({
         method: 'GET',
-        url: 'https://randomuser.me/api/?results=10&nat=US&seed=a'
+        url: 'https://randomuser.me/api/?results=30&nat=US&seed=a'
     }).then((response) => {
         const pointedUser = response.data.results;
 

@@ -2,8 +2,17 @@
     .panel-heading   
         h3.panel-title
             strong Location
-        span(data-toggle="collapse" data-target="#user-map-panel" class='glyphicon' ng-class="{'glyphicon-chevron-up':!isMapHidden, 'glyphicon-chevron-down':isMapHidden}" ng-click="isMapHidden=!isMapHidden")
-    .panel-body.in#user-map-panel
+        button(
+            data-toggle="collapse"
+            data-target="#user-map-panel"
+            aria-expanded="false"
+            aria-controls="user-map-panel"
+            class='glyphicon',
+            ng-class="{'glyphicon-chevron-up':!isMapHidden, 'glyphicon-chevron-down':isMapHidden}",
+            ng-click="isMapHidden=!isMapHidden",
+            )
+    #user-map-panel.collapse(ng-class="!isMapHidden ? 'in' : ''")
+        .panel-body
          .row
             .col-xs-12
                 ng-map.ng-map(zoom="3" center="[{{lat}},{{lng}}]")

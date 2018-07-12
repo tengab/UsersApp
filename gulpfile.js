@@ -8,6 +8,18 @@ const styles = require('./styles')
 
 var devMode = false
 
+gulp.task('jade', function buildHTML() {
+    return gulp.src('./src/templates/**/*.jade')
+    .pipe(jade({
+        doctype: 'html',
+        pretty: false
+     }))
+    .pipe(gulp.dest('./dist/'))
+    .pipe(browserSync.reload({
+        stream: true
+    }))
+  });
+
 gulp.task('css', function () {
     gulp.src(styles)
         .pipe(concat('main.css'))
@@ -34,20 +46,12 @@ gulp.task('html', function () {
         }))
 })
 
-gulp.task('jade', function buildHTML() {
-    return gulp.src('./src/templates/**/*.jade')
-    .pipe(jade({
-        doctype: 'html',
-        pretty: false
-     }))
-    .pipe(gulp.dest('./dist/'))
-    .pipe(browserSync.reload({
-        stream: true
-    }))
-  });
+
 
 gulp.task('build', function () {
-    gulp.start(['css', 'js', 'html', 'jade'])
+    gulp.start(['jade','css','js',
+    //  'html',
+      ])
 })
 
 gulp.task('browser-sync', function () {
@@ -63,7 +67,7 @@ gulp.task('start', function () {
     devMode = true
     gulp.start(['build', 'browser-sync'])
     gulp.watch(['./src/css/**/*.css'], ['css'])
+    gulp.watch(['./src/templates/**/*.jade'], ['jade'])
     gulp.watch(['./src/js/**/*.js'], ['js'])
     gulp.watch(['./src/templates/**/*.html'], ['html'])
-    gulp.watch(['./src/templates/**/*.jade'], ['jade'])
-})
+    })
