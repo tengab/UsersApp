@@ -80926,16 +80926,16 @@ usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams',
 
 usersApp.controller('usersController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, uiGridConstants) { // eslint-disable-line
 
-
     $scope.gridOptions = {
         enableSorting: true,
         rowHeight: 50,
         minRowsToShow: 10,
+        showTreeExpandNoChildren: true,
         showHeader: true,
         columnDefs: [
             {
                 field: 'thumbnail', cellClass: 'thumbnailCell',
-                cellTemplate: '<img src=\'{{grid.getCellValue(row, col)}}\'>'
+                cellTemplate: '<img ng-src=\'{{grid.getCellValue(row, col)}}\'>',
             },
             { field: 'firstName', cellClass: 'thumbnailCell' },
             {

@@ -2,11 +2,8 @@ const gulp = require('gulp')
 const concat = require('gulp-concat')
 const jade = require('gulp-jade');
 const browserSync = require('browser-sync').create()
-
 const scripts = require('./scripts')
 const styles = require('./styles')
-
-var devMode = false
 
 gulp.task('jade', function buildHTML() {
     return gulp.src('./src/templates/**/*.jade')
