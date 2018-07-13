@@ -1,8 +1,8 @@
-usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) { // eslint-disable-line prefer-arrow-callback, no-undef
+usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'APIService', function($scope, $http, $stateParams, APIService) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     $http({
         method: 'GET',
-        url: 'https://randomuser.me/api/?results=30&nat=US&seed=a'
+        url: APIService.api
     }).then((response) => {
         const pointedUser = response.data.results;
 
@@ -16,4 +16,3 @@ usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams',
         $scope.lng = $scope.fetchedUser.location.coordinates.longitude;
     });
 }]);
-

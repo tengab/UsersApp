@@ -80904,11 +80904,11 @@ usersApp.config(['$stateProvider', function($stateProvider) {
         });
 }
 ]);
-usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', function($scope, $http, $stateParams) { // eslint-disable-line prefer-arrow-callback, no-undef
+usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'APIService', function($scope, $http, $stateParams, APIService) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     $http({
         method: 'GET',
-        url: 'https://randomuser.me/api/?results=30&nat=US&seed=a'
+        url: APIService.api
     }).then((response) => {
         const pointedUser = response.data.results;
 
@@ -80922,9 +80922,7 @@ usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams',
         $scope.lng = $scope.fetchedUser.location.coordinates.longitude;
     });
 }]);
-
-
-usersApp.controller('usersController', ['$scope', '$http', 'uiGridConstants', function ($scope, $http, uiGridConstants) { // eslint-disable-line
+usersApp.controller('usersController', ['$scope', '$http', 'uiGridConstants', 'APIService', function($scope, $http, uiGridConstants, APIService) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     $scope.gridOptions = {
         enableSorting: true,
@@ -80935,7 +80933,7 @@ usersApp.controller('usersController', ['$scope', '$http', 'uiGridConstants', fu
         columnDefs: [
             {
                 field: 'thumbnail', cellClass: 'thumbnailCell',
-                cellTemplate: '<img ng-src=\'{{grid.getCellValue(row, col)}}\'>',
+                cellTemplate: '<img ng-src=\'{{grid.getCellValue(row, col)}}\'>'
             },
             { field: 'firstName', cellClass: 'thumbnailCell' },
             {
@@ -80956,10 +80954,21 @@ usersApp.controller('usersController', ['$scope', '$http', 'uiGridConstants', fu
         });
     };
 
+    // getUsers() {
+    //     return $http.get(`${user-details}user-details${id}`)
+    // }
+
+    // getUser(id) {
+    //     return $http.get(API_ENV +id)
+    // }
+
+    // this.usersService.getUser('c34a6b3796ab')
+    //     .them()
+
     $scope.gridOptions.virtualizationThreshold = '5000';
     $scope.gridOptions.enableHorizontalScrollbar = uiGridConstants.scrollbars.NEVER;
 
-    $http.get('https://randomuser.me/api/?results=30&nat=US&seed=a')
+    $http.get(APIService.api)
         .then((response) => {
             const gridInput = response.data.results.map((el) => {
                 const rowObject = {};
@@ -80979,6 +80988,9 @@ usersApp.controller('usersController', ['$scope', '$http', 'uiGridConstants', fu
 
         });
 }]);
+usersApp.service('APIService', function() { // eslint-disable-line prefer-arrow-callback, no-undef
+    this.api = 'https://randomuser.me/api/?results=30&nat=US&seed=a';
+});
 usersApp.directive('userInfo', function() { // eslint-disable-line prefer-arrow-callback, no-undef
     return {
         restrict: 'AEC',
