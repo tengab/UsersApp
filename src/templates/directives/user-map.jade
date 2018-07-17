@@ -15,5 +15,5 @@
         .panel-body
          .row
             .col-xs-12
-                ng-map.ng-map(zoom="3" center="[{{lat}},{{lng}}]")
-                    marker(position="[{{lat}},{{lng}}]" centered='true')
+                ng-map.ng-map(zoom="3" center="[{{fetchedUser.location.coordinates.latitude}},{{fetchedUser.location.coordinates.longitude}}]")
+                    marker(position="[{{fetchedUser.location.coordinates.latitude}},{{fetchedUser.location.coordinates.longitude}}]" centered='true')

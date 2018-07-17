@@ -1,18 +1,19 @@
-usersApp.controller('userDetailsController', ['$scope', '$http', '$stateParams', 'APIService', function($scope, $http, $stateParams, APIService) { // eslint-disable-line prefer-arrow-callback, no-undef
+usersApp.controller('userDetailsController', ['$scope', '$rootScope', '$http', '$stateParams', 'APIService', function($scope, $rootScope, $http, $stateParams, APIService) { // eslint-disable-line prefer-arrow-callback, no-undef
 
-    $http({
-        method: 'GET',
-        url: APIService.api
-    }).then((response) => {
-        const pointedUser = response.data.results;
 
-        for (let i = 0; i < pointedUser.length; i++) {
-            if (pointedUser[i].login.uuid === $stateParams.id) {
-                $scope.fetchedUser = pointedUser[i];
-            }
+    const fullUsersData = APIService.usersFromApi.concat(APIService.usersAddedManually);
+
+    for (let i = 0; i < fullUsersData.length; i++) {
+        if (fullUsersData[i].id === $stateParams.id) {
+            $scope.fetchedUser = fullUsersData[i];
         }
+    }
 
-        $scope.lat = $scope.fetchedUser.location.coordinates.latitude;
-        $scope.lng = $scope.fetchedUser.location.coordinates.longitude;
-    });
+    $scope.lat = $scope.fetchedUser.location.coordinates.latitude;
+    $scope.lng = $scope.fetchedUser.location.coordinates.longitude;
+
+    if (($scope.lat && $scope.lng) !== 'noData') {
+        $scope.isMapAvailable = true;
+    }
+
 }]);

@@ -1,0 +1,55 @@
+.panel.panel-default
+    .panel-heading   
+        h3.panel-title
+            strong Add User
+        button(
+            data-toggle="collapse"
+            data-target="#user-add-user-panel"
+            aria-expanded="false"
+            aria-controls="user-add-user-panel"
+            class='glyphicon',
+            ng-class="{'glyphicon-chevron-up':!isMapHidden, 'glyphicon-chevron-down':isAddUserHidden}",
+            ng-click="isAddUserHidden=!isAddUserHidden",
+            )
+    #user-add-user-panel.collapse(ng-class="!isAddUserHidden ? 'in' : ''")
+        .panel-body
+            .row.add-user-form
+                .col-xs-6
+                    div
+                        .form-group
+                            label(for='title') Title (select one):
+                            span  *
+                            select#title.form-control(ng-model='addTitle')
+                                option(value='' selected disabled) Please select
+                                option Mister
+                                option Mr
+                                option Miss
+                                option Mrs
+                        .form-group
+                            label(for='first-name') First Name:
+                            span  *
+                            input#first-name.form-control(type='text' ng-model='addFirstName' placeholder="What's your name?")
+                        .form-group
+                            label(for='last-name') Last Name:
+                            span  *
+                            input#last-name.form-control(type='text' ng-model='addLastName' placeholder="What's your last name?")
+                .col-xs-6
+                    div
+                        .form-group
+                            label(for='gender') Gender (select one):
+                            span  *
+                            select#gender.form-control(ng-model='addGender')
+                                option(value='' selected disabled) Please select
+                                option female
+                                option male
+                        .form-group
+                            label(for='age') Your age:
+                            span  *
+                            input#age.form-control(type='number' placeholder='How old are you?' ng-model='addAge')
+                        .form-group
+                            label(for='e-mail') E-mail:
+                            span  *
+                            input#e-mail.form-control(type='email' placeholder='e.g. you@example.com' ng-model='addEmail')
+            sup
+                small.star-text * Field required
+            button.btn.btn-primary.btn-block(type="submit" ng-click='userAdd()') Add user

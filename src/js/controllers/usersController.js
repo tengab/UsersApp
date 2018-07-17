@@ -1,19 +1,21 @@
-usersApp.controller('usersController', ['$scope', '$http', 'uiGridConstants', 'APIService', function($scope, $http, uiGridConstants, APIService) { // eslint-disable-line prefer-arrow-callback, no-undef
+usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService', function($scope, uiGridConstants, APIService) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     $scope.gridOptions = {
         enableSorting: true,
         rowHeight: 50,
-        minRowsToShow: 10,
+        minRowsToShow: 7,
         showTreeExpandNoChildren: true,
         showHeader: true,
         columnDefs: [
             {
-                field: 'thumbnail', cellClass: 'thumbnailCell',
+                name: 'Thumbnail',
+                field: 'picture.thumbnail', cellClass: 'thumbnailCell',
                 cellTemplate: '<img ng-src=\'{{grid.getCellValue(row, col)}}\'>'
             },
-            { field: 'firstName', cellClass: 'thumbnailCell' },
+            { name: 'First name', field: 'name.first', cellClass: 'thumbnailCell' },
             {
-                field: 'lastName',
+                name: 'last name',
+                field: 'name.last',
                 cellClass: 'thumbnailCell',
                 cellTemplate: '<a ng-click="grid.appScope.cellClicked(row,col)" ui-sref="user-details({id: row.entity.id })" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</a>'
             },
@@ -21,6 +23,9 @@ usersApp.controller('usersController', ['$scope', '$http', 'uiGridConstants', 'A
             { field: 'gender', grouping: { groupPriority: 1 }, sort: { priority: 0, direction: 'desc' }, cellClass: 'thumbnailCell' }
         ]
     };
+    APIService.apiData.then((data) => {
+        $scope.gridOptions.data = data.concat(APIService.usersAddedManually);
+    });
 
     $scope.gridOptions.onRegisterApi = (gridApi) => {
         $scope.gridApi = gridApi;
@@ -30,37 +35,41 @@ usersApp.controller('usersController', ['$scope', '$http', 'uiGridConstants', 'A
         });
     };
 
-    // getUsers() {
-    //     return $http.get(`${user-details}user-details${id}`)
-    // }
-
-    // getUser(id) {
-    //     return $http.get(API_ENV +id)
-    // }
-
-    // this.usersService.getUser('c34a6b3796ab')
-    //     .them()
-
     $scope.gridOptions.virtualizationThreshold = '5000';
     $scope.gridOptions.enableHorizontalScrollbar = uiGridConstants.scrollbars.NEVER;
+    $scope.noPhotoThumbnail = '/images/nophoto_thumbnail.png';
+    $scope.noPhotoLarge = '/images/nophoto_large.png';
 
-    $http.get(APIService.api)
-        .then((response) => {
-            const gridInput = response.data.results.map((el) => {
-                const rowObject = {};
-                rowObject.thumbnail = el.picture.thumbnail;
-                rowObject.largePicture = el.picture.large;
-                rowObject.firstName = el.name.first.charAt(0).toUpperCase() + el.name.first.slice(1);
-                rowObject.lastName = el.name.last.charAt(0).toUpperCase() + el.name.last.slice(1);
-                rowObject.age = el.dob.age;
-                rowObject.gender = el.gender;
-                rowObject.id = el.login.uuid;
-                return rowObject;
-            });
-            return gridInput;
-        }).then((data) => {
 
-            $scope.gridOptions.data = data;
+    $scope.userAdd = () => {
+        if (($scope.addFirstName && $scope.addLastName && $scope.addTitle && $scope.addGender && $scope.addAge && $scope.addEmail) != undefined) {
+            addUserData();
+        } else {
+            alert('Fulfill all required fields');
+        }
+    };
 
-        });
+    addUserData = () => {
+        const newUserObject = {
+            picture: {},
+            name: {},
+            location: { coordinates: {} }
+        };
+        newUserObject.status = 'addedManually';
+        newUserObject.id = Date.now().toString();
+        newUserObject.name.first = $scope.addFirstName;
+        newUserObject.name.last = $scope.addLastName;
+        newUserObject.name.title = $scope.addTitle;
+        newUserObject.email = $scope.addEmail;
+        newUserObject.age = $scope.addAge;
+        newUserObject.gender = $scope.addGender;
+        newUserObject.picture.thumbnail = $scope.noPhotoThumbnail;
+        newUserObject.picture.large = $scope.noPhotoLarge;
+        newUserObject.location.coordinates.latitude = 'noData';
+        newUserObject.location.coordinates.longitude = 'noData';
+
+        APIService.setUsersAddedManually(newUserObject);
+
+        $scope.gridOptions.data = APIService.usersFromApi.concat(APIService.usersAddedManually);
+    };
 }]);

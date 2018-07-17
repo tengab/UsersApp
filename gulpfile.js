@@ -2,9 +2,17 @@ const gulp = require('gulp')
 const concat = require('gulp-concat')
 const jade = require('gulp-jade');
 const less = require('gulp-less');
+const image = require('gulp-image');
 const browserSync = require('browser-sync').create()
 const scripts = require('./scripts')
 const styles = require('./styles')
+
+
+gulp.task('image', function () {
+    gulp.src('./src/images/*')
+      .pipe(image())
+      .pipe(gulp.dest('./dist/images/'));
+  });
 
 gulp.task('less', function () {
     return gulp.src(styles)
@@ -48,8 +56,7 @@ gulp.task('html', function () {
 
 
 gulp.task('build', function () {
-    gulp.start(['less', 'jade', 'js',
-    ])
+    gulp.start(['image', 'less', 'jade', 'js'])
 })
 
 gulp.task('browser-sync', function () {
@@ -64,7 +71,9 @@ gulp.task('browser-sync', function () {
 gulp.task('start', function () {
     devMode = true
     gulp.start(['build', 'browser-sync'])
+    gulp.watch(['./src/images/*'], ['images'])
     gulp.watch(['./src/less/**/*.less'], ['less'])
     gulp.watch(['./src/templates/**/*.jade'], ['jade'])
     gulp.watch(['./src/js/**/*.js'], ['js'])
+   
 })

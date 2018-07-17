@@ -4,6 +4,9 @@ html {
 body {
   margin: 2px;
 }
+#grid1 {
+  border-radius: 5px;
+}
 .thumbnailCell {
   padding: 1px;
   display: flex;
@@ -42,4 +45,26 @@ body {
 }
 .ui-grid-tree-header-row .thumbnailCell img {
   display: none;
+}
+.input-group {
+  width: 100%;
+}
+.input-group span {
+  width: 150px;
+}
+select option[disabled]:first-child {
+  display: none;
+}
+.add-user-form {
+  display: flex;
+  justify-content: space-between;
+}
+#no-location {
+  text-align: center;
+}
+.form-group span {
+  color: red;
+}
+.star-text {
+  color: red;
 }
