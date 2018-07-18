@@ -26,6 +26,8 @@ usersApp.service('APIService', ['$http', function($http) { // eslint-disable-lin
 
     this.usersFromApi = [];
 
+    this.usersAddedManually = [];
+
     this.apiData.then((data) => {
         this.usersFromApi = data;
     });
@@ -36,10 +38,6 @@ usersApp.service('APIService', ['$http', function($http) { // eslint-disable-lin
         this.usersAddedManually = this.usersAddedManually.concat(d);
     };
 
-    this.fullUsersData = this.usersFromApi.concat(this.usersAddedManually);
-
-    // this.getUsersAddedManually = () => {
-    //     return this.usersAddedManually
-    // }
+    this.getUsersAddedManually = () => this.apiData;
 
 }]);

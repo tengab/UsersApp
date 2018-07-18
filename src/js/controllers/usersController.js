@@ -6,6 +6,8 @@ usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService
         minRowsToShow: 7,
         showTreeExpandNoChildren: true,
         showHeader: true,
+        virtualizationThreshold: '5000',
+        enableHorizontalScrollbar: uiGridConstants.scrollbars.NEVER,
         columnDefs: [
             {
                 name: 'Thumbnail',
@@ -35,12 +37,6 @@ usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService
         });
     };
 
-    $scope.gridOptions.virtualizationThreshold = '5000';
-    $scope.gridOptions.enableHorizontalScrollbar = uiGridConstants.scrollbars.NEVER;
-    $scope.noPhotoThumbnail = '/images/nophoto_thumbnail.png';
-    $scope.noPhotoLarge = '/images/nophoto_large.png';
-
-
     $scope.userAdd = () => {
         if (($scope.addFirstName && $scope.addLastName && $scope.addTitle && $scope.addGender && $scope.addAge && $scope.addEmail) != undefined) {
             addUserData();
@@ -63,8 +59,8 @@ usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService
         newUserObject.email = $scope.addEmail;
         newUserObject.age = $scope.addAge;
         newUserObject.gender = $scope.addGender;
-        newUserObject.picture.thumbnail = $scope.noPhotoThumbnail;
-        newUserObject.picture.large = $scope.noPhotoLarge;
+        newUserObject.picture.thumbnail = '/images/nophoto_thumbnail.png';
+        newUserObject.picture.large = '/images/nophoto_large.png';
         newUserObject.location.coordinates.latitude = 'noData';
         newUserObject.location.coordinates.longitude = 'noData';
 

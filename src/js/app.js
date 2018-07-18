@@ -10,8 +10,8 @@ usersApp.config(['$stateProvider', function($stateProvider) {
     })
         .state({
             name: 'user-details',
-            url: '/user-details/:id',
-            templateUrl: 'views/user-details.html',
+            url: '/user-details/{id}',
+            templateUrl: '/views/user-details.html',
             controller: 'userDetailsController'
         });
 }
