@@ -1,4 +1,4 @@
-usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService', function($scope, uiGridConstants, APIService) { // eslint-disable-line prefer-arrow-callback, no-undef
+usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService', function ($scope, uiGridConstants, APIService) { // eslint-disable-line prefer-arrow-callback, no-undef
 
     $scope.gridOptions = {
         enableSorting: true,
@@ -14,19 +14,30 @@ usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService
                 field: 'picture.thumbnail', cellClass: 'thumbnailCell',
                 cellTemplate: '<img ng-src=\'{{grid.getCellValue(row, col)}}\'>'
             },
-            { name: 'First name', field: 'name.first', cellClass: 'thumbnailCell' },
+            {name: 'First name', field: 'name.first', cellClass: 'thumbnailCell'},
             {
                 name: 'last name',
                 field: 'name.last',
                 cellClass: 'thumbnailCell',
-                cellTemplate: '<a ng-click="grid.appScope.cellClicked(row,col)" ui-sref="user-details({id: row.entity.id })" class="ui-grid-cell-contents" title="TOOLTIP">{{COL_FIELD CUSTOM_FILTERS}}</a>'
+                cellTemplate: 'directives/last-name-cell.html'
             },
-            { field: 'age', cellClass: 'thumbnailCell' },
-            { field: 'gender', grouping: { groupPriority: 1 }, sort: { priority: 0, direction: 'desc' }, cellClass: 'thumbnailCell' }
+            {field: 'age', cellClass: 'thumbnailCell'},
+            {
+                field: 'gender',
+                grouping: {groupPriority: 1},
+                sort: {priority: 0, direction: 'desc'},
+                cellClass: 'thumbnailCell'
+            },
+            {
+                name: 'delete user',
+                cellClass: 'thumbnailCell',
+                cellTemplate: 'directives/delete-button.html'
+            },
         ]
     };
-    APIService.apiData.then((data) => {
-        $scope.gridOptions.data = data.concat(APIService.usersAddedManually);
+
+    APIService.apiData.then(() => {
+        $scope.gridOptions.data = APIService.usersFromApi.concat(APIService.usersAddedManually);
     });
 
     $scope.gridOptions.onRegisterApi = (gridApi) => {
@@ -38,7 +49,7 @@ usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService
     };
 
     $scope.userAdd = () => {
-        if (($scope.addFirstName && $scope.addLastName && $scope.addTitle && $scope.addGender && $scope.addAge && $scope.addEmail) != undefined) {
+        if (($scope.addFirstName && $scope.addLastName && $scope.addTitle && $scope.addGender && $scope.addAge && $scope.addEmail) !== undefined) {
             addUserData();
         } else {
             alert('Fulfill all required fields');
@@ -49,7 +60,7 @@ usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService
         const newUserObject = {
             picture: {},
             name: {},
-            location: { coordinates: {} }
+            location: {coordinates: {}}
         };
         newUserObject.status = 'addedManually';
         newUserObject.id = Date.now().toString();
@@ -66,6 +77,16 @@ usersApp.controller('usersController', ['$scope', 'uiGridConstants', 'APIService
 
         APIService.setUsersAddedManually(newUserObject);
 
-        $scope.gridOptions.data = APIService.usersFromApi.concat(APIService.usersAddedManually);
+        $scope.gridOptions.data = $scope.gridOptions.data.concat(APIService.usersAddedManually);
+    };
+
+    $scope.cellClicked = (row) => {
+
+        for (let i = 0; i < $scope.gridOptions.data.length; i++) {
+            if (row.entity.id === $scope.gridOptions.data[i].id) {
+                $scope.gridOptions.data.splice(i, 1)
+            }
+        }
+
     };
 }]);

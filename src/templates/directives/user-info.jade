@@ -21,7 +21,7 @@
                         strong {{fetchedUser.name.title.charAt(0).toUpperCase() + fetchedUser.name.title.slice(1)}} {{fetchedUser.name.first.charAt(0).toUpperCase() + fetchedUser.name.first.slice(1)}} {{fetchedUser.name.last.charAt(0).toUpperCase() + fetchedUser.name.last.slice(1)}}
                         div 
                         strong gender: 
-                        {{fetchedUser.gender === "male" ? '♂' : fetchedUser.gender === "female" ? '♀' : ''}}
+                        {{fetchedUser.gender === 'male' ? '♂' : fetchedUser.gender === 'female' ? '♀' : '' }}
                         div 
                         strong email: 
-                        {{fetchedUser.email}}
+                        {{ fetchedUser.email }}

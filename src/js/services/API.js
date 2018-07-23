@@ -32,8 +32,6 @@ usersApp.service('APIService', ['$http', function($http) { // eslint-disable-lin
         this.usersFromApi = data;
     });
 
-    this.usersAddedManually = [];
-
     this.setUsersAddedManually = (d) => {
         this.usersAddedManually = this.usersAddedManually.concat(d);
     };
