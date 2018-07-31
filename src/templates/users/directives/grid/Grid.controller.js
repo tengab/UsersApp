@@ -1,7 +1,5 @@
-class UsersGridController {
+class GridController {
     constructor(uiGridConstants, APIService) {
-
-
         this.uiGridConstants = uiGridConstants;
         this.APIService = APIService;
 
@@ -28,7 +26,7 @@ class UsersGridController {
                     name: 'last name',
                     field: 'name.last',
                     cellClass: 'thumbnailCell',
-                    cellTemplate: 'directives/last-name-cell.html'
+                    cellTemplate: 'users/directives/grid/cell-templates/last-name-cell.html'
                 },
                 {field: 'age', cellClass: 'thumbnailCell'},
                 {
@@ -40,7 +38,7 @@ class UsersGridController {
                 {
                     name: 'delete user',
                     cellClass: 'thumbnailCell',
-                    cellTemplate: 'directives/delete-button.html'
+                    cellTemplate: 'users/directives/grid/cell-templates/delete-button.html'
                 }
             ]
         };
@@ -66,6 +64,6 @@ class UsersGridController {
     }
 }
 
-UsersGridController.$inject = ['uiGridConstants', 'APIService'];
+GridController.$inject = ['uiGridConstants', 'APIService'];
 
-usersApp.controller('UsersGridController', UsersGridController);  // eslint-disable-line no-undef
+usersApp.controller('UsersGridController', GridController);  // eslint-disable-line no-undef

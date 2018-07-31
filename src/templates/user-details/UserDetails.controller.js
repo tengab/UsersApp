@@ -14,7 +14,6 @@ class UserDetailsController {
             for (let i = 0; i < this.APIService.usersList.length; i++) {
                 if (this.APIService.usersList[i].id === this.$stateParams.id) {
                     this.fetchedUser = this.APIService.usersList[i];
-                    console.log(this.fetchedUser);
                 }
             }
             if ((this.fetchedUser.location.coordinates.latitude || this.fetchedUser.location.coordinates.longitude) !== 'noData') {

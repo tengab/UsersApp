@@ -1,6 +1,5 @@
 [
     "./node_modules/angular/angular.js",
-    "./src/js/**/*.js",
     "./node_modules/angular-ui-router/release/angular-ui-router.js",
     "./node_modules/angular-ui-grid/ui-grid.js",
     "./node_modules/bootsrtap/dist/js/bootsrtap.js",

@@ -10,12 +10,12 @@ usersApp.config(['$stateProvider', function($stateProvider) {
         .state({
             name: 'users',
             url: '/',
-            templateUrl: 'views/users.html'
+            templateUrl: 'users/users.html'
         })
         .state({
             name: 'user-details',
             url: '/user-details/{id}',
-            templateUrl: '/views/user-details.html',
+            templateUrl: 'user-details/user-details.html',
             controller: 'UserDetailsController',
             controllerAs: '$ctrl'
         });
