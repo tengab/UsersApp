@@ -1,16 +1,18 @@
 DOCTYPE
-html(lang='en' ng-app='usersApp')
+html(lang="en" ng-app="usersApp")
 
 head
     title Users App
-  
-    base(href='/')
-    link(rel='stylesheet' href='css/main.css' type='text/css')
-    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css")
-    link(rel="stylesheet" href="http://ui-grid.info/release/ui-grid.min.css")
-       
-    script(src='js/scripts.js')
+
+    base(href="/")
+    link(rel="stylesheet" href='css/main.css' type="text/css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css")
+    link(rel="stylesheet" href="http://ui-grid.info/release/ui-grid.min.css" type="text/css")
+    link(href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css")
+
+    script(src="js/scripts.js" type="text/javascript")
+    script(src="js/scripts_es6.js" type="text/javascript")
     script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByYJ0xFVKhi5Ro8jp1600xtlI5bFr8VnE" type="text/javascript")
-    
+
 body
     ui-view

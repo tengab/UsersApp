@@ -11,12 +11,14 @@
   "dependencies": {
     "@uirouter/angularjs": "^1.0.18",
     "angular": "1.4.14",
-    "gulp": "^3.9.1",
+    "angular-ui-grid": "^4.6.2",
+    "angular-ui-router": "^1.0.18",
+    "bootstrap": "^3.3.7",
     "ui-grid-css": "^1.0.1"
   },
   "devDependencies": {
-    "angular-ui-grid": "^4.6.2",
-    "angular-ui-router": "^1.0.18",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "browser-sync": "^2.24.5",
     "eslint": "^5.0.1",
     "gulp": "^3.9.1",

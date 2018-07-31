@@ -2,26 +2,18 @@
     .panel-heading
         h3.panel-title
             strong User info
-        button(
-            data-toggle="collapse"
-            data-target="#user-details-panel"
-            aria-expanded="false"
-            aria-controls="user-details-panel"
-            class='glyphicon',
-            ng-class="{'glyphicon-chevron-up':!isInfoHidden, 'glyphicon-chevron-down':isInfoHidden}",
-            ng-click="isInfoHidden=!isInfoHidden",
-            )
-    #user-details-panel.collapse(ng-class="!isInfoHidden ? 'in' : ''")
+        button.glyphicon(ng-class="{'glyphicon-chevron-up':!isInfoHidden, 'glyphicon-chevron-down':isInfoHidden}" ng-click="isInfoHidden=!isInfoHidden")
+    .collapse(ng-class="!isInfoHidden ? 'in' : ''")
         .panel-body
             .row
-                .col-xs-4.row-custom-photo 
-                    img(src='{{fetchedUser.picture.large}}')
+                .col-xs-4.row-custom-photo
+                    img(src='{{$ctrl.fetchedUser.picture.large}}')
                 .col-xs-8.row-custom-details
                     div
-                        strong {{fetchedUser.name.title.charAt(0).toUpperCase() + fetchedUser.name.title.slice(1)}} {{fetchedUser.name.first.charAt(0).toUpperCase() + fetchedUser.name.first.slice(1)}} {{fetchedUser.name.last.charAt(0).toUpperCase() + fetchedUser.name.last.slice(1)}}
-                        div 
-                        strong gender: 
-                        {{fetchedUser.gender === 'male' ? '♂' : fetchedUser.gender === 'female' ? '♀' : '' }}
-                        div 
-                        strong email: 
-                        {{ fetchedUser.email }}
+                        strong {{$ctrl.fetchedUser.name.title}} {{$ctrl.fetchedUser.name.first}} {{$ctrl.fetchedUser.name.last}}
+                        div
+                        strong gender:
+                        span {{$ctrl.fetchedUser.gender === 'male' ? ' &#9794' : $ctrl.fetchedUser.gender === 'female' ? ' &#9792' : '' }}
+                        div
+                        strong email: &nbsp
+                        span {{ $ctrl.fetchedUser.email }}

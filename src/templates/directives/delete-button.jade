@@ -1,2 +1,3 @@
 .ui-grid-cell-contents
-    button.btn.btn-default(ng-click="grid.appScope.cellClicked(row,col)") X
+    button.btn.btn-default(ng-click="grid.appScope.$ctrl.deleteUser(row,col)")
+        i.fa.fa-trash-o
