@@ -1,47 +1,20 @@
 class AddUserController {
-    constructor(APIService) {
+    constructor(APIService, User) {
         this.APIService = APIService;
+        this.User = User;
+        this.newUser = this.User.create();
+        // this.newUser = this.User.createUser();
     }
 
     userAddForm() {
+        this.newUser.name.first = (this.newUser.name.first != null) ? this.newUser.name.first.capitalize() : this.newUser.name.first;
+        this.newUser.name.last = (this.newUser.name.last != null) ? this.newUser.name.last.capitalize() : this.newUser.name.last;
 
-        const newUserObject = {
-            picture: {
-                thumbnail: '/images/nophoto_thumbnail.png',
-                large: '/images/nophoto_large.png'
-            },
-            name: {
-                first: this.addFirstName,
-                last: this.addLastName,
-                title: this.addTitle
-            },
-            location: {
-                coordinates: {
-                    latitude: 'noData',
-                    longitude: 'noData'
-                }
-            },
-            status: 'addedManually',
-            id: Date.now().toString(),
-            email: this.addEmail,
-            age: this.addAge,
-            gender: this.addGender
-        };
-
-        if ((this.addFirstName &&
-            this.addLastName &&
-            this.addTitle &&
-            this.addGender &&
-            this.addAge &&
-            this.addEmail) !== undefined) {
-
-            this.APIService.addUser(newUserObject);
-        } else {
-            alert('Fulfill all required fields');
-        }
+        this.APIService.addUser(this.newUser);
+        this.newUser = this.User.create();
     }
 }
 
-AddUserController.$inject = ['APIService'];
+AddUserController.$inject = ['APIService', 'User'];
 
 usersApp.controller('AddUserController', AddUserController);  // eslint-disable-line no-undef

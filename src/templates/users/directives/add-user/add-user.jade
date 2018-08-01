@@ -11,7 +11,7 @@
                         .form-group
                             label(for='title') Title (select one):
                             span  *
-                            select#title.form-control(ng-model='$ctrl.addTitle')
+                            select#title.form-control(ng-model='$ctrl.newUser.name.title')
                                 option(value='' selected disabled) Please select
                                 option Mister
                                 option Mr
@@ -20,28 +20,28 @@
                         .form-group
                             label(for='first-name') First Name:
                             span  *
-                            input#first-name.form-control(type='text' ng-model='$ctrl.addFirstName' placeholder="Type user's first name")
+                            input#first-name.form-control(type='text' ng-model='$ctrl.newUser.name.first' placeholder="Type user's first name")
                         .form-group
                             label(for='last-name') Last Name:
                             span  *
-                            input#last-name.form-control(type='text' ng-model='$ctrl.addLastName' placeholder="Type user's last name")
+                            input#last-name.form-control(type='text' ng-model='$ctrl.newUser.name.last' placeholder="Type user's last name")
                 .col-xs-6
                     div
                         .form-group
                             label(for='gender') Gender (select one):
                             span  *
-                            select#gender.form-control(ng-model='$ctrl.addGender')
+                            select#gender.form-control(ng-model='$ctrl.newUser.gender')
                                 option(value='' selected disabled) Please select
                                 option female
                                 option male
                         .form-group
                             label(for='age') Your age:
                             span  *
-                            input#age.form-control(type='number' ng-model='$ctrl.addAge' placeholder="Type user's age")
+                            input#age.form-control(type='number' ng-model='$ctrl.newUser.age' placeholder="Type user's age")
                         .form-group
                             label(for='e-mail') E-mail:
                             span  *
-                            input#e-mail.form-control(type='email' ng-model='$ctrl.addEmail' placeholder='e.g. user@example.com')
+                            input#e-mail.form-control(type='email' ng-model='$ctrl.newUser.email' placeholder='e.g. user@example.com')
             sup
                 small.star-text * Field required
             button.btn.btn-primary.btn-block(type="submit" ng-click='$ctrl.userAddForm()') Add user
