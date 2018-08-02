@@ -8,7 +8,7 @@ class APIService {
 
     getUsers() {
         if (this.usersList.length === 0) {
-            return this.$http.get('https://randomuser.me/api/?results=7&nat=US&seed=b')
+            return this.$http.get('https://randomuser.me/api/?results=7&nat=US&seed=e')
                 .then((response) => {
                     this.usersList = response.data.results.map(user => this.User.mapUser(user));
                 });
@@ -17,6 +17,7 @@ class APIService {
 
     addUser(newUser) {
         this.usersList.push(newUser);
+
     }
 
     deleteUser(deletedUserId) {

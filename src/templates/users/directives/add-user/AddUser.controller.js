@@ -6,12 +6,32 @@ class AddUserController {
         // this.newUser = this.User.createUser();
     }
 
+    setGender() {
+        switch (this.newUser.name.title) {
+            case 'Mr':
+                return this.newUser.gender = 'male';
+            case 'Mister':
+                return this.newUser.gender = 'male';
+            case 'Mrs':
+                return this.newUser.gender = 'female';
+            case 'Miss':
+                return this.newUser.gender = 'female';
+            default:
+                return this.newUser.gender = null;
+        }
+    }
+
     userAddForm() {
         this.newUser.name.first = (this.newUser.name.first != null) ? this.newUser.name.first.capitalize() : this.newUser.name.first;
         this.newUser.name.last = (this.newUser.name.last != null) ? this.newUser.name.last.capitalize() : this.newUser.name.last;
+        this.newUser.gender = this.setGender();
 
-        this.APIService.addUser(this.newUser);
-        this.newUser = this.User.create();
+        if (this.newUser.name.title && this.newUser.name.first && this.newUser.name.last && this.newUser.age && this.newUser.email !== null) {
+            this.APIService.addUser(this.newUser);
+            this.newUser = this.User.create();
+        } else {
+            alert('Fulfill all required fields');
+        }
     }
 }
 

@@ -28,12 +28,8 @@
                 .col-xs-6
                     div
                         .form-group
-                            label(for='gender') Gender (select one):
-                            span  *
-                            select#gender.form-control(ng-model='$ctrl.newUser.gender')
-                                option(value='' selected disabled) Please select
-                                option female
-                                option male
+                            label(for='gender') Gender:
+                            input#gender.form-control(type='text' disabled ng-value='$ctrl.setGender()' placeholder="User's gender")
                         .form-group
                             label(for='age') Your age:
                             span  *

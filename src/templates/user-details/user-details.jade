@@ -1,11 +1,11 @@
 a.btn.btn-primary(ui-sref="users") Indietro
+
 h1 USER DETAILS
 
 user-info
 
-
-user-map(ng-if="isMapAvailable")
-div(ng-if='!isMapAvailable')
+user-map(ng-if="$ctrl.isMapAvailable")
+div(ng-if='!$ctrl.isMapAvailable')
     .panel.panel-default
         #no-location.panel-body
             strong No location data
