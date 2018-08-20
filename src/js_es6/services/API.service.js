@@ -8,7 +8,7 @@ class APIService {
 
     getUsers() {
         if (this.usersList.length === 0) {
-            return this.$http.get('https://randomuser.me/api/?results=7&nat=US&seed=e')
+            return this.$http.get('https://randomuser.me/api/?results=7&seed=a')
                 .then((response) => {
                     this.usersList = response.data.results.map(user => this.User.mapUser(user));
                 });

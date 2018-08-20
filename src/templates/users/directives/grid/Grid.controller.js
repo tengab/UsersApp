@@ -1,12 +1,14 @@
 class GridController {
-    constructor(uiGridConstants, APIService) {
+    constructor(uiGridConstants, APIService, Countries) {
         this.uiGridConstants = uiGridConstants;
         this.APIService = APIService;
+        this.Countries = Countries;
 
         this.gridDataDisplay();
     }
 
     gridDataDisplay() {
+        console.log(this.Countries.countries());
         this.gridOptions = {
             enableSorting: true,
             rowHeight: 50,
@@ -27,6 +29,11 @@ class GridController {
                     field: 'name.last',
                     cellClass: 'thumbnailCell',
                     cellTemplate: 'users/directives/grid/cell-templates/last-name-cell.html'
+                },
+                {
+                    name: 'nationality',
+                    field: 'natFullName',
+                    cellClass: 'thumbnailCell'
                 },
                 {field: 'age', cellClass: 'thumbnailCell'},
                 {
@@ -62,8 +69,9 @@ class GridController {
     deleteUser(row) {
         this.APIService.deleteUser(row.entity.id);
     }
+
 }
 
-GridController.$inject = ['uiGridConstants', 'APIService'];
+GridController.$inject = ['uiGridConstants', 'APIService', 'Countries'];
 
 usersApp.controller('UsersGridController', GridController);  // eslint-disable-line no-undef

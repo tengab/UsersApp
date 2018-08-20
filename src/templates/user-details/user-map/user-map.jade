@@ -7,5 +7,18 @@
         .panel-body
             .row
                 .col-xs-12
-                    ng-map.ng-map(zoom="3" center="[{{$ctrl.fetchedUser.location.coordinates.latitude}},{{$ctrl.fetchedUser.location.coordinates.longitude}}]")
-                        marker(position="[{{$ctrl.fetchedUser.location.coordinates.latitude}},{{$ctrl.fetchedUser.location.coordinates.longitude}}]" centered='true')
+                    ng-map.ng-map(zoom="-1" center="[0,0]")
+                        marker(
+                        position="[{{$ctrl.fetchedUser.location.coordinates.latitude}},{{$ctrl.fetchedUser.location.coordinates.longitude}}]"
+                        icon='/images/fetchedUserMarker.png'
+                        title='{{$ctrl.fetchedUser.name.first}} {{$ctrl.fetchedUser.name.last}}'
+                        animation='Animation.DROP'
+                        )
+                        marker(
+                        ng-repeat='friend in $ctrl.FriendsSearch.friendsList'
+                        position="[{{friend.location.coordinates.latitude}},{{friend.location.coordinates.longitude}}]"
+                        icon="{{ $index == $ctrl.FriendsSearch.markerIndexOfClickedFriend ? '/images/activeFriendMarker.png' : '/images/friendsMarker.png' }}"
+                        animation="{{ $index == $ctrl.FriendsSearch.markerIndexOfClickedFriend ? 'Animation.BOUNCE': '!Animation.BOUNCE'}}"
+                        title="CLICK ME!"
+                        on-click="$ctrl.touchMarker({{$index}})"
+                        )

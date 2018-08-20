@@ -9,11 +9,9 @@ class AddUserController {
     setGender() {
         switch (this.newUser.name.title) {
             case 'Mr':
-                return this.newUser.gender = 'male';
             case 'Mister':
                 return this.newUser.gender = 'male';
             case 'Mrs':
-                return this.newUser.gender = 'female';
             case 'Miss':
                 return this.newUser.gender = 'female';
             default:

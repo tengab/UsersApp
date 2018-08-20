@@ -1,6 +1,12 @@
 usersApp.directive('userMap', function() { // eslint-disable-line prefer-arrow-callback, no-undef
     return {
         restrict: 'E',
-        templateUrl: 'user-details/user-map/user-map.html'
+        templateUrl: 'user-details/user-map/user-map.html',
+        controller: 'UserMapCtrl',
+        controllerAs: '$ctrl',
+        scope: {},
+        bindToController: {
+            fetchedUser: '='
+        }
     };
 });

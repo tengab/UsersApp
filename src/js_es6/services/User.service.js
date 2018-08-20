@@ -1,10 +1,14 @@
-class User {
+class UserService {
 
-    constructor() {
+    constructor(Countries) {
+        this.Countries = Countries;
+
         this.id = Date.now().toString();
         this.age = null;
         this.gender = null;
         this.email = null;
+        this.natFullName = null;
+        this.phone = null
         this.picture = {
             thumbnail: '/images/nophoto_thumbnail.png',
             large: '/images/nophoto_large.png'
@@ -23,11 +27,11 @@ class User {
     }
 
     create() {
-        return new User();
+        return new UserService();
     }
 
     mapUser(backendUser) {
-        const user = new User();
+        const user = new UserService();
         user.id = backendUser.login.uuid;
         user.age = backendUser.dob.age;
         user.gender = backendUser.gender;
@@ -47,6 +51,9 @@ class User {
                 longitude: backendUser.location.coordinates.longitude
             }
         };
+        user.nat = backendUser.nat;
+        user.natFullName = this.Countries.countries(backendUser.nat);
+        user.phone = backendUser.phone;
         return user;
     }
 
@@ -61,7 +68,7 @@ class User {
     //     age,
     //     gender,
     //     id,
-    //     email
+    //     email,
     // ) {
     //     return {
     //         picture: {
@@ -88,4 +95,6 @@ class User {
     // }
 }
 
-usersApp.service('User', User); // eslint-disable-line no-undef
+UserService.$inject = ['Countries'];
+
+usersApp.service('User', UserService); // eslint-disable-line no-undef

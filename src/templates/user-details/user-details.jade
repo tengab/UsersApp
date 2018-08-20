@@ -2,9 +2,12 @@ a.btn.btn-primary(ui-sref="users") Indietro
 
 h1 USER DETAILS
 
-user-info
+user-info(fetched-user="$ctrl.fetchedUser")
 
-user-map(ng-if="$ctrl.isMapAvailable")
+friends-search(fetched-user="$ctrl.fetchedUser" ng-show='$ctrl.FriendsSearch.areFriendsSearched')
+
+
+user-map(ng-if="$ctrl.isMapAvailable" fetched-user="$ctrl.fetchedUser")
 div(ng-if='!$ctrl.isMapAvailable')
     .panel.panel-default
         #no-location.panel-body
