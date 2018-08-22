@@ -18,6 +18,9 @@
                                 option Miss
                                 option Mrs
                         .form-group
+                            label(for='gender') Gender:
+                            input#gender.form-control(type='text' disabled ng-value='$ctrl.setGender()' placeholder="User's gender")
+                        .form-group
                             label(for='first-name') First Name:
                             span  *
                             input#first-name.form-control(type='text' ng-model='$ctrl.newUser.name.first' placeholder="Type user's first name")
@@ -28,9 +31,6 @@
                 .col-xs-6
                     div
                         .form-group
-                            label(for='gender') Gender:
-                            input#gender.form-control(type='text' disabled ng-value='$ctrl.setGender()' placeholder="User's gender")
-                        .form-group
                             label(for='age') Your age:
                             span  *
                             input#age.form-control(type='number' ng-model='$ctrl.newUser.age' placeholder="Type user's age")
@@ -38,6 +38,18 @@
                             label(for='e-mail') E-mail:
                             span  *
                             input#e-mail.form-control(type='email' ng-model='$ctrl.newUser.email' placeholder='e.g. user@example.com')
+                        .form-group
+                            label(for='nationality') Nationality (select one):
+                            span  *
+                            select#nationality.form-control(ng-model='$ctrl.newUser.nat')
+                                option(value='' selected disabled) Please select
+                                option(ng-repeat='country in $ctrl.Countries.definedCountriesForDatabaseSearch' value='{{country}}') {{$ctrl.Countries.getCountryFullName(country)}}
+                                option OTHER
+                        .form-group(ng-class="($ctrl.newUser.nat === null || $ctrl.newUser.nat !== 'OTHER') ? 'hide-other-nationality' : '' ")
+                            label(for='other-nationality') Nationality:
+                            span  *
+                            input#other-nationality.form-control(type='text' ng-model='$ctrl.newUser.natFullName' placeholder="Type user's Nationality")
+
             sup
                 small.star-text * Field required
             button.btn.btn-primary.btn-block(type="submit" ng-click='$ctrl.userAddForm()') Add user

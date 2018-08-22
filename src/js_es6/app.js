@@ -1,9 +1,9 @@
-const usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.autoResize', 'ui.grid.grouping', 'ngMap']);
+const usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.autoResize', 'ui.grid.grouping', 'ngMap', 'ngMaterial', 'ngMessages']);
 
 usersApp.config(['$stateProvider', function($stateProvider) {
 
     String.prototype.capitalize = function() {
-        return this.charAt(0).toUpperCase() + this.slice(1);
+        return this.toLowerCase().replace( /\b./g, firstLetter => (firstLetter.toUpperCase()));
     };
 
     $stateProvider

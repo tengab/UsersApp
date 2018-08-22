@@ -14,12 +14,13 @@ class UserDetailsController {
     clickedUsersDetails() {
         this.FriendsSearch.friendsList = [];
         const dataToDisplay = () => {
+
             for (let i = 0; i < this.APIService.usersList.length; i++) {
                 if (this.APIService.usersList[i].id === this.$stateParams.id) {
                     this.fetchedUser = this.APIService.usersList[i];
                 }
             }
-            if ((this.fetchedUser.location.coordinates.latitude || this.fetchedUser.location.coordinates.longitude) !== 'noData') {
+            if ((this.fetchedUser.nat) !== 'OTHER') {
                 this.isMapAvailable = true;
             }
         };
@@ -35,8 +36,6 @@ class UserDetailsController {
             this.$location.path('/');
         }
     }
-
-
 
 
 }

@@ -9,6 +9,7 @@
                 .col-xs-12
                     ng-map.ng-map(zoom="-1" center="[0,0]")
                         marker(
+                        ng-if="$ctrl.fetchedUser.location.coordinates.longitude !== 'noData'"
                         position="[{{$ctrl.fetchedUser.location.coordinates.latitude}},{{$ctrl.fetchedUser.location.coordinates.longitude}}]"
                         icon='/images/fetchedUserMarker.png'
                         title='{{$ctrl.fetchedUser.name.first}} {{$ctrl.fetchedUser.name.last}}'

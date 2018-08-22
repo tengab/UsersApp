@@ -5,11 +5,10 @@ class UserInfoCtrl {
 
     searchForFriends() {
         this.FriendsSearch.getFriends(this.fetchedUser.nat);
-        this.FriendsSearch.areFriendsSearched = true
-
+        this.FriendsSearch.areFriendsSearched = true;
     }
 
 }
 
 UserInfoCtrl.$inject = ['FriendsSearch'];
-usersApp.controller('UserInfoCtrl', UserInfoCtrl);
+usersApp.controller('UserInfoCtrl', UserInfoCtrl); // eslint-disable-line no-undef

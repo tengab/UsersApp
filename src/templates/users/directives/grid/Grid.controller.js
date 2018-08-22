@@ -8,7 +8,6 @@ class GridController {
     }
 
     gridDataDisplay() {
-        console.log(this.Countries.countries());
         this.gridOptions = {
             enableSorting: true,
             rowHeight: 50,

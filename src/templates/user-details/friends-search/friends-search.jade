@@ -12,13 +12,19 @@
                     onclick="event.preventDefault()"
                     ng-click='$ctrl.selectTab($index)'
                     ng-class='{active: $index == $ctrl.FriendsSearch.markerIndexOfClickedFriend }')
-                        a(href="# + '{{$ctrl.chosenFriend.id}}'"
-                        ng-click="$ctrl.clickedFriend($index)")
-                            img(ng-src='{{ friend.picture.thumbnail }}')
+
+                            a(href="# + '{{$ctrl.chosenFriend.id}}'" ng-click="$ctrl.clickedFriend($index)")
+                                img(ng-src='{{ friend.picture.thumbnail }}')
+
+
         .tab-content.friend-details(id='{{$ctrl.chosenFriend.id}}')
             .tab-pane.active
-                h4(ng-if='$ctrl.FriendsSearch.markerIndexOfClickedFriend != null')
-                    strong {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].name.title}} {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].name.first}} {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].name.last}}
-                    br
-                    i.fa.fa-mobile
-                    span(ng-cloak) &nbsp {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].phone}}
+                div.chosen-friend-panel(ng-if='$ctrl.FriendsSearch.markerIndexOfClickedFriend != null')
+                    h4
+                        strong {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].name.title}} {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].name.first}} {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].name.last}}
+                    div
+                        i.fa.fa-mobile
+                        span(ng-cloak) &nbsp {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].phone}}
+                    button.btn.btn-default(ng-click='$ctrl.showDialog($ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend])')
+                            i.fa.fa-info-circle &nbsp MORE INFO &nbsp
+                            i.fa.fa-info-circle

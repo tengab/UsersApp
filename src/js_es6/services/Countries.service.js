@@ -1,6 +1,10 @@
 class CountriesService {
 
-    countries(nationalityCode) {
+    constructor() {
+        this.definedCountriesForDatabaseSearch = ['AU', 'BR', 'CA', 'CH', 'DE', 'DK', 'ES', 'FI', 'FR', 'GB', 'IE', 'IR', 'NO', 'NL', 'NZ', 'TR', 'US'];
+    }
+
+    getCountryFullName(nationalityCode) {
         const nationalities = {
             AF: 'Afghanistan',
             AX: 'Aland Islands',
@@ -255,7 +259,5 @@ class CountriesService {
         }
     }
 }
-
-// Countries.$inject = [];
 
 usersApp.service('Countries', CountriesService); // eslint-disable-line no-undef

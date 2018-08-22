@@ -7,8 +7,9 @@ class UserService {
         this.age = null;
         this.gender = null;
         this.email = null;
+        this.nat = null;
         this.natFullName = null;
-        this.phone = null
+        this.phone = null;
         this.picture = {
             thumbnail: '/images/nophoto_thumbnail.png',
             large: '/images/nophoto_large.png'
@@ -22,7 +23,11 @@ class UserService {
             coordinates: {
                 latitude: 'noData',
                 longitude: 'noData'
-            }
+            },
+            street: null,
+            city: null,
+            state: null,
+            postcode: null
         };
     }
 
@@ -49,11 +54,16 @@ class UserService {
             coordinates: {
                 latitude: backendUser.location.coordinates.latitude,
                 longitude: backendUser.location.coordinates.longitude
-            }
+            },
+            street: backendUser.location.street.capitalize(),
+            city: backendUser.location.city.capitalize(),
+            state: backendUser.location.state.capitalize(),
+            postcode: backendUser.location.postcode
         };
         user.nat = backendUser.nat;
-        user.natFullName = this.Countries.countries(backendUser.nat);
+        user.natFullName = this.Countries.getCountryFullName(backendUser.nat);
         user.phone = backendUser.phone;
+
         return user;
     }
 
