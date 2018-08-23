@@ -4,11 +4,9 @@ class DeleteUserService {
     }
 
     deleteUser(deletedUserId) {
-        for (let i = 0; i < this.APIService.usersList.length; i++) {
-            if (deletedUserId === this.APIService.usersList[i].id) {
-                this.APIService.usersList.splice(i, 1);
-            }
-        }
+
+        return this.APIService.usersList.splice(this.APIService.usersList.findIndex(el => el.id === deletedUserId), 1);
+
     }
 }
 

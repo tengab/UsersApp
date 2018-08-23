@@ -3,7 +3,7 @@ class FriendsSearchService {
         this.$http = $http;
         this.User = User;
         this.friendsList = [];
-        this.areFriendsSearched = false;
+        // this.areFriendsSearched = false;
 
     }
 

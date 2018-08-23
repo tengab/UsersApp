@@ -9,7 +9,7 @@ const scripts = require('./scripts');
 const styles = require('./styles');
 
 gulp.task('image', () => {
-    gulp.src('./src/images/*')
+    gulp.src('./src/common/images/*')
         .pipe(image())
         .pipe(gulp.dest('./dist/images/'));
 });

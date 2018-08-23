@@ -1,5 +1,5 @@
 [
-     "./src/less/**/*.less",
+     "./src/**/*.less",
      "./node_modules/angular-material/angular-material.css"
 
 ]

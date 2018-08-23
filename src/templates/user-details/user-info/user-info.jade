@@ -1,11 +1,11 @@
 .panel.panel-default
-    .panel-heading
+    .panel-heading.heading-to-hide
         h3.panel-title
             strong User info
         button.glyphicon(ng-class="{'glyphicon-chevron-up':!isInfoHidden, 'glyphicon-chevron-down':isInfoHidden}" ng-click="isInfoHidden=!isInfoHidden")
     .collapse(ng-class="!isInfoHidden ? 'in' : ''")
         .panel-body
-            .row
+            .row.customized-position
                 .col-xs-3.row-custom-photo
                     img(src='{{$ctrl.fetchedUser.picture.large}}')
                 .col-xs-5.row-custom-details

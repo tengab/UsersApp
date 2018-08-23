@@ -1,7 +1,6 @@
 class AddUserController {
-    constructor(APIService, User, Countries, AddUserService) {
-        this.AddUserService = AddUserService
-        this.APIService = APIService;
+    constructor(User, Countries, AddUserService) {
+        this.AddUserService = AddUserService;
         this.Countries = Countries;
         this.User = User;
         this.newUser = this.User.create();
@@ -26,11 +25,11 @@ class AddUserController {
 
         this.newUser.name.last = (this.newUser.name.last != null) ? this.newUser.name.last.capitalize() : this.newUser.name.last;
 
-        (this.newUser.nat != null && this.newUser.nat != 'OTHER') ?
-            this.newUser.natFullName = this.Countries.getCountryFullName(this.newUser.nat)
-            :
-            this.newUser.nat === 'OTHER' ?
-                this.newUser.natFullName = this.newUser.natFullName.capitalize() : null;
+        if (this.newUser.nat != null && this.newUser.nat !== 'OTHER') {
+            this.newUser.natFullName = this.Countries.getCountryFullName(this.newUser.nat);
+        } else if (this.newUser.nat === 'OTHER') {
+            this.newUser.natFullName = this.newUser.natFullName.capitalize();
+        }
 
         this.newUser.gender = this.setGender();
 
@@ -44,6 +43,6 @@ class AddUserController {
     }
 }
 
-AddUserController.$inject = ['APIService', 'User', 'Countries', 'AddUserService'];
+AddUserController.$inject = ['User', 'Countries', 'AddUserService'];
 
 usersApp.controller('AddUserController', AddUserController);  // eslint-disable-line no-undef

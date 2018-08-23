@@ -6,7 +6,6 @@ class AddUserService {
     addUser(newUser) {
         this.APIService.usersList.push(newUser);
     }
-
 }
 
 AddUserService.$inject = ['APIService'];

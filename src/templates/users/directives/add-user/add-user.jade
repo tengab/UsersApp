@@ -1,5 +1,5 @@
 .panel.panel-default
-    .panel-heading
+    .panel-heading.heading-to-hide
         h3.panel-title
             strong Add User
         button.glyphicon(ng-class="{'glyphicon-chevron-up':!isAddUserHidden, 'glyphicon-chevron-down':isAddUserHidden}" ng-click="isAddUserHidden=!isAddUserHidden")
@@ -22,32 +22,32 @@
                             input#gender.form-control(type='text' disabled ng-value='$ctrl.setGender()' placeholder="User's gender")
                         .form-group
                             label(for='first-name') First Name:
-                            span  *
+                            span.star-text  *
                             input#first-name.form-control(type='text' ng-model='$ctrl.newUser.name.first' placeholder="Type user's first name")
                         .form-group
                             label(for='last-name') Last Name:
-                            span  *
+                            span.star-text  *
                             input#last-name.form-control(type='text' ng-model='$ctrl.newUser.name.last' placeholder="Type user's last name")
                 .col-xs-6
                     div
                         .form-group
                             label(for='age') Your age:
-                            span  *
+                            span.star-text  *
                             input#age.form-control(type='number' ng-model='$ctrl.newUser.age' placeholder="Type user's age")
                         .form-group
                             label(for='e-mail') E-mail:
-                            span  *
+                            span.star-text  *
                             input#e-mail.form-control(type='email' ng-model='$ctrl.newUser.email' placeholder='e.g. user@example.com')
                         .form-group
                             label(for='nationality') Nationality (select one):
-                            span  *
+                            span.star-text  *
                             select#nationality.form-control(ng-model='$ctrl.newUser.nat')
                                 option(value='' selected disabled) Please select
                                 option(ng-repeat='country in $ctrl.Countries.definedCountriesForDatabaseSearch' value='{{country}}') {{$ctrl.Countries.getCountryFullName(country)}}
                                 option OTHER
                         .form-group(ng-class="($ctrl.newUser.nat === null || $ctrl.newUser.nat !== 'OTHER') ? 'hide-other-nationality' : '' ")
                             label(for='other-nationality') Nationality:
-                            span  *
+                            span.star-text  *
                             input#other-nationality.form-control(type='text' ng-model='$ctrl.newUser.natFullName' placeholder="Type user's Nationality")
 
             sup

@@ -1,5 +1,5 @@
 .panel.panel-default
-    .panel-heading
+    .panel-heading.heading-to-hide
         h3.panel-title
             strong Suggested friends from {{$ctrl.fetchedUser.natFullName}}
         button.glyphicon(ng-class="{'glyphicon-chevron-up':!isFriendsSearchHidden, 'glyphicon-chevron-down':isFriendsSearchHidden}" ng-click="isFriendsSearchHidden=!isFriendsSearchHidden")
@@ -10,14 +10,11 @@
                     li(
                     ng-repeat='friend in $ctrl.FriendsSearchService.friendsList'
                     onclick="event.preventDefault()"
-                    ng-click='$ctrl.selectTab($index)'
+                    ng-click='$ctrl.clickedFriend($index)'
                     ng-class='{active: $index == $ctrl.MarkerMapClickService.markerIndexOfClickedFriend }')
-
-                            a(href="# + '{{$ctrl.chosenFriend.id}}'" ng-click="$ctrl.clickedFriend($index)")
+                            a(href="# + '{{$ctrl.MarkerMapClickService.markerIndexOfClickedFriend}}'")
                                 img(ng-src='{{ friend.picture.thumbnail }}')
-
-
-        .tab-content.friend-details(id='{{$ctrl.chosenFriend.id}}')
+        .tab-content.friend-details(id='{{$ctrl.MarkerMapClickService.markerIndexOfClickedFriend}}')
             .tab-pane.active
                 div.chosen-friend-panel(ng-if='$ctrl.MarkerMapClickService.markerIndexOfClickedFriend != null')
                     h4

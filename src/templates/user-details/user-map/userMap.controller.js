@@ -2,10 +2,10 @@ class UserMapCtrl {
     constructor(MarkerMapClickService, FriendsSearchService) {
         this.FriendsSearchService = FriendsSearchService;
         this.MarkerMapClickService = MarkerMapClickService;
-        this.touchMarker = this.touchMarker.bind(this);
+        this.clickMarker = this.clickMarker.bind(this);
     }
 
-    touchMarker(event, index) {
+    clickMarker(event, index) {
         this.MarkerMapClickService.markerIndexOfClickedFriend = index;
     }
 
