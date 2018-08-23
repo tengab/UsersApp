@@ -8,10 +8,10 @@
             .friends-list.col-xs-12
                 ul.nav.nav-tabs
                     li(
-                    ng-repeat='friend in $ctrl.FriendsSearch.friendsList'
+                    ng-repeat='friend in $ctrl.FriendsSearchService.friendsList'
                     onclick="event.preventDefault()"
                     ng-click='$ctrl.selectTab($index)'
-                    ng-class='{active: $index == $ctrl.FriendsSearch.markerIndexOfClickedFriend }')
+                    ng-class='{active: $index == $ctrl.MarkerMapClickService.markerIndexOfClickedFriend }')
 
                             a(href="# + '{{$ctrl.chosenFriend.id}}'" ng-click="$ctrl.clickedFriend($index)")
                                 img(ng-src='{{ friend.picture.thumbnail }}')
@@ -19,12 +19,12 @@
 
         .tab-content.friend-details(id='{{$ctrl.chosenFriend.id}}')
             .tab-pane.active
-                div.chosen-friend-panel(ng-if='$ctrl.FriendsSearch.markerIndexOfClickedFriend != null')
+                div.chosen-friend-panel(ng-if='$ctrl.MarkerMapClickService.markerIndexOfClickedFriend != null')
                     h4
-                        strong {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].name.title}} {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].name.first}} {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].name.last}}
+                        strong {{$ctrl.FriendsSearchService.friendsList[$ctrl.MarkerMapClickService.markerIndexOfClickedFriend].name.title}} {{$ctrl.FriendsSearchService.friendsList[$ctrl.MarkerMapClickService.markerIndexOfClickedFriend].name.first}} {{$ctrl.FriendsSearchService.friendsList[$ctrl.MarkerMapClickService.markerIndexOfClickedFriend].name.last}}
                     div
                         i.fa.fa-mobile
-                        span(ng-cloak) &nbsp {{$ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend].phone}}
-                    button.btn.btn-default(ng-click='$ctrl.showDialog($ctrl.FriendsSearch.friendsList[$ctrl.FriendsSearch.markerIndexOfClickedFriend])')
+                        span(ng-cloak) &nbsp {{$ctrl.FriendsSearchService.friendsList[$ctrl.MarkerMapClickService.markerIndexOfClickedFriend].phone}}
+                    button.btn.btn-default(ng-click='$ctrl.showDialog($ctrl.FriendsSearchService.friendsList[$ctrl.MarkerMapClickService.markerIndexOfClickedFriend])')
                             i.fa.fa-info-circle &nbsp MORE INFO &nbsp
                             i.fa.fa-info-circle

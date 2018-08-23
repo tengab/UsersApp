@@ -3,7 +3,6 @@ class FriendsSearchService {
         this.$http = $http;
         this.User = User;
         this.friendsList = [];
-        this.markerIndexOfClickedFriend = null;
         this.areFriendsSearched = false;
 
     }
@@ -16,13 +15,8 @@ class FriendsSearchService {
             });
     }
 
-    marker(index) {
-
-        this.markerIndexOfClickedFriend = index;
-    }
-
 }
 
 FriendsSearchService.$inject = ['$http', 'User'];
 
-usersApp.service('FriendsSearch', FriendsSearchService); // eslint-disable-line no-undef
+usersApp.service('FriendsSearchService', FriendsSearchService); // eslint-disable-line no-undef

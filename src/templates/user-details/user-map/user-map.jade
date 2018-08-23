@@ -16,10 +16,10 @@
                         animation='Animation.DROP'
                         )
                         marker(
-                        ng-repeat='friend in $ctrl.FriendsSearch.friendsList'
+                        ng-repeat='friend in $ctrl.FriendsSearchService.friendsList'
                         position="[{{friend.location.coordinates.latitude}},{{friend.location.coordinates.longitude}}]"
-                        icon="{{ $index == $ctrl.FriendsSearch.markerIndexOfClickedFriend ? '/images/activeFriendMarker.png' : '/images/friendsMarker.png' }}"
-                        animation="{{ $index == $ctrl.FriendsSearch.markerIndexOfClickedFriend ? 'Animation.BOUNCE': '!Animation.BOUNCE'}}"
+                        icon="{{ $index == $ctrl.MarkerMapClickService.markerIndexOfClickedFriend ? '/images/activeFriendMarker.png' : '/images/friendsMarker.png' }}"
+                        animation="{{ $index == $ctrl.MarkerMapClickService.markerIndexOfClickedFriend ? 'Animation.BOUNCE': '!Animation.BOUNCE'}}"
                         title="CLICK ME!"
                         on-click="$ctrl.touchMarker({{$index}})"
                         )

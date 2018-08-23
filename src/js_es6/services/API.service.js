@@ -15,18 +15,6 @@ class APIService {
         }
     }
 
-    addUser(newUser) {
-        this.usersList.push(newUser);
-
-    }
-
-    deleteUser(deletedUserId) {
-        for (let i = 0; i < this.usersList.length; i++) {
-            if (deletedUserId === this.usersList[i].id) {
-                this.usersList.splice(i, 1);
-            }
-        }
-    }
 }
 
 APIService.$inject = ['$http', 'User'];

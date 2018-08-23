@@ -4,7 +4,7 @@ h1 USER DETAILS
 
 user-info(fetched-user="$ctrl.fetchedUser")
 
-friends-search(fetched-user="$ctrl.fetchedUser" ng-show='$ctrl.FriendsSearch.areFriendsSearched')
+friends-search(fetched-user="$ctrl.fetchedUser" ng-show='$ctrl.FriendsSearchService.areFriendsSearched')
 
 
 user-map(ng-if="$ctrl.isMapAvailable" fetched-user="$ctrl.fetchedUser")

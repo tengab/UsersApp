@@ -1,9 +1,10 @@
 class FriendsSearchCtrl {
-    constructor(FriendsSearch, $mdDialog, $scope) {
-        this.FriendsSearch = FriendsSearch;
+    constructor(FriendsSearchService, $mdDialog, $scope, MarkerMapClickService) {
+        this.MarkerMapClickService = MarkerMapClickService;
+        this.FriendsSearchService = FriendsSearchService;
         this.chosenFriend = null;
-        this.FriendsSearch.marker(null);
-        this.FriendsSearch.areFriendsSearched = false;
+        this.MarkerMapClickService.marker(null);
+        this.FriendsSearchService.areFriendsSearched = false;
 
         this.$mdDialog = $mdDialog;
         this.$scope = $scope;
@@ -12,12 +13,12 @@ class FriendsSearchCtrl {
 
     clickedFriend(index) {
         this.chosenFriend = index;
-        this.FriendsSearch.marker(index);
+        this.MarkerMapClickService.marker(index);
     }
 
     selectTab(index) {
 
-        this.FriendsSearch.marker(index);
+        this.MarkerMapClickService.marker(index);
     }
 
     showDialog(friend) {
@@ -62,6 +63,6 @@ class FriendsSearchCtrl {
 
 }
 
-FriendsSearchCtrl.$inject = ['FriendsSearch', '$mdDialog', '$scope'];
+FriendsSearchCtrl.$inject = ['FriendsSearchService', '$mdDialog', '$scope', 'MarkerMapClickService'];
 
 usersApp.controller('FriendsSearchCtrl', FriendsSearchCtrl); // eslint-disable-line no-undef

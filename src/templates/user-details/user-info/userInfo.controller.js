@@ -1,14 +1,14 @@
 class UserInfoCtrl {
-    constructor(FriendsSearch) {
-        this.FriendsSearch = FriendsSearch;
+    constructor(FriendsSearchService) {
+        this.FriendsSearchService = FriendsSearchService;
     }
 
     searchForFriends() {
-        this.FriendsSearch.getFriends(this.fetchedUser.nat);
-        this.FriendsSearch.areFriendsSearched = true;
+        this.FriendsSearchService.getFriends(this.fetchedUser.nat);
+        this.FriendsSearchService.areFriendsSearched = true;
     }
 
 }
 
-UserInfoCtrl.$inject = ['FriendsSearch'];
+UserInfoCtrl.$inject = ['FriendsSearchService'];
 usersApp.controller('UserInfoCtrl', UserInfoCtrl); // eslint-disable-line no-undef

@@ -1,5 +1,6 @@
 class AddUserController {
-    constructor(APIService, User, Countries) {
+    constructor(APIService, User, Countries, AddUserService) {
+        this.AddUserService = AddUserService
         this.APIService = APIService;
         this.Countries = Countries;
         this.User = User;
@@ -34,7 +35,7 @@ class AddUserController {
         this.newUser.gender = this.setGender();
 
         if (this.newUser.name.title && this.newUser.name.first && this.newUser.name.last && this.newUser.age && this.newUser.email !== null && this.newUser.nat !== null) {
-            this.APIService.addUser(this.newUser);
+            this.AddUserService.addUser(this.newUser);
             this.newUser = this.User.create();
         } else {
             alert('Fulfill all required fields');
@@ -43,6 +44,6 @@ class AddUserController {
     }
 }
 
-AddUserController.$inject = ['APIService', 'User', 'Countries'];
+AddUserController.$inject = ['APIService', 'User', 'Countries', 'AddUserService'];
 
 usersApp.controller('AddUserController', AddUserController);  // eslint-disable-line no-undef

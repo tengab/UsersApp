@@ -1,10 +1,10 @@
 class UserDetailsController {
-    constructor($location, $stateParams, APIService, FriendsSearch) {
+    constructor($location, $stateParams, APIService, FriendsSearchService) {
 
         this.$location = $location;
         this.$stateParams = $stateParams;
         this.APIService = APIService;
-        this.FriendsSearch = FriendsSearch;
+        this.FriendsSearchService = FriendsSearchService;
 
         this.fetchedUser = {};
         this.clickedUsersDetails();
@@ -12,7 +12,7 @@ class UserDetailsController {
     }
 
     clickedUsersDetails() {
-        this.FriendsSearch.friendsList = [];
+        this.FriendsSearchService.friendsList = [];
         const dataToDisplay = () => {
 
             for (let i = 0; i < this.APIService.usersList.length; i++) {
@@ -40,6 +40,6 @@ class UserDetailsController {
 
 }
 
-UserDetailsController.$inject = ['$location', '$stateParams', 'APIService', 'FriendsSearch'];
+UserDetailsController.$inject = ['$location', '$stateParams', 'APIService', 'FriendsSearchService'];
 
 usersApp.controller('UserDetailsController', UserDetailsController);  // eslint-disable-line no-undef
