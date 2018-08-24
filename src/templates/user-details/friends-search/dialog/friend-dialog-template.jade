@@ -3,15 +3,16 @@ md-dialog
         .panel.panel-info
             .panel-body.dialog-container
                 .picture
-                    img(ng-src='{{$ctrl.friend.picture.large}}')
-                h3 {{$ctrl.friend.name.title}} {{$ctrl.friend.name.first}} {{$ctrl.friend.name.last}}
-                h5 Street: {{$ctrl.friend.location.street}}
-                h5 City: {{$ctrl.friend.location.city}}
-                h5 State: {{$ctrl.friend.location.state}}
-                h5 Country: {{$ctrl.friend.natFullName}}
+                    img(ng-src='{{$ctrl.friendDataToDialog.picture.large}}')
+                h3 {{$ctrl.friendDataToDialog.name.title}} {{$ctrl.friendDataToDialog.name.first}} {{$ctrl.friendDataToDialog.name.last}}
+                h5 Street: {{$ctrl.friendDataToDialog.location.street}}
+                h5 City: {{$ctrl.friendDataToDialog.location.city}}
+                h5 State: {{$ctrl.friendDataToDialog.location.state}}
+                h5 Postcode: {{$ctrl.friendDataToDialog.location.postcode}}
+                h5 Country: {{$ctrl.friendDataToDialog.natFullName}}
                 hr
-                h5 Phone number: {{$ctrl.friend.phone}}
-                h5 E-mail: {{$ctrl.friend.email}}
+                h5 Phone number: {{$ctrl.friendDataToDialog.phone}}
+                h5 E-mail: {{$ctrl.friendDataToDialog.email}}
     md-dialog-actions
         button.btn.btn-warning(ng-click='$ctrl.closeDialog()')
-              | Close
+            | Close

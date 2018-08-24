@@ -1,5 +1,5 @@
 class FriendsSearchCtrl {
-    constructor(FriendsSearchService, $mdDialog, MarkerMapClickService) {
+    constructor($mdDialog, FriendsSearchService, MarkerMapClickService) {
         this.MarkerMapClickService = MarkerMapClickService;
         this.FriendsSearchService = FriendsSearchService;
         this.$mdDialog = $mdDialog;
@@ -7,7 +7,7 @@ class FriendsSearchCtrl {
         this.MarkerMapClickService.marker(null);
         this.FriendsSearchService.areFriendsSearched = false;
 
-        this.friend = {};
+        this.friendDataToDialog = {};
     }
 
     clickedFriend(index) {
@@ -15,7 +15,7 @@ class FriendsSearchCtrl {
     }
 
     showDialog(friend) {
-        this.friend = friend;
+        this.friendDataToDialog = friend;
         this.$mdDialog.show({
             controller: () => this,
             controllerAs: '$ctrl',
@@ -30,6 +30,6 @@ class FriendsSearchCtrl {
 
 }
 
-FriendsSearchCtrl.$inject = ['FriendsSearchService', '$mdDialog', 'MarkerMapClickService'];
+FriendsSearchCtrl.$inject = ['$mdDialog', 'FriendsSearchService', 'MarkerMapClickService'];
 
 usersApp.controller('FriendsSearchCtrl', FriendsSearchCtrl); // eslint-disable-line no-undef
