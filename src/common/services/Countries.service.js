@@ -260,4 +260,4 @@ class CountriesService {
     }
 }
 
-usersApp.service('Countries', CountriesService); // eslint-disable-line no-undef
+usersApp.service('CountriesService', CountriesService); // eslint-disable-line no-undef

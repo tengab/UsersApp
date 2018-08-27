@@ -43,7 +43,7 @@
                             span.star-text  *
                             select#nationality.form-control(ng-model='$ctrl.newUser.nat')
                                 option(value='' selected disabled) Please select
-                                option(ng-repeat='country in $ctrl.Countries.definedCountriesForDatabaseSearch' value='{{country}}') {{$ctrl.Countries.getCountryFullName(country)}}
+                                option(ng-repeat='country in $ctrl.CountriesService.definedCountriesForDatabaseSearch' value='{{country}}') {{$ctrl.CountriesService.getCountryFullName(country)}}
                                 option OTHER
                         .form-group(ng-class="($ctrl.newUser.nat === null || $ctrl.newUser.nat !== 'OTHER') ? 'hide-other-nationality' : '' ")
                             label(for='other-nationality') Nationality:

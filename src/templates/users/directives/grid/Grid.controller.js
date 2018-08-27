@@ -1,9 +1,9 @@
 class GridController {
-    constructor(uiGridConstants, APIService, Countries, DeleteUserService) {
+    constructor(uiGridConstants, APIService, CountriesService, DeleteUserService) {
         this.DeleteUserService = DeleteUserService;
         this.uiGridConstants = uiGridConstants;
         this.APIService = APIService;
-        this.Countries = Countries;
+        this.CountriesService = CountriesService;
 
         this.gridDataDisplay();
     }
@@ -72,6 +72,6 @@ class GridController {
 
 }
 
-GridController.$inject = ['uiGridConstants', 'APIService', 'Countries', 'DeleteUserService'];
+GridController.$inject = ['uiGridConstants', 'APIService', 'CountriesService', 'DeleteUserService'];
 
 usersApp.controller('UsersGridController', GridController);  // eslint-disable-line no-undef

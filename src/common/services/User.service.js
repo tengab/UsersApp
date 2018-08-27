@@ -1,7 +1,7 @@
 class UserService {
 
-    constructor(Countries) {
-        this.Countries = Countries;
+    constructor(CountriesService) {
+        this.CountriesService = CountriesService;
 
         this.id = Date.now().toString();
         this.age = null;
@@ -61,7 +61,7 @@ class UserService {
             postcode: backendUser.location.postcode
         };
         user.nat = backendUser.nat;
-        user.natFullName = this.Countries.getCountryFullName(backendUser.nat);
+        user.natFullName = this.CountriesService.getCountryFullName(backendUser.nat);
         user.phone = backendUser.phone;
 
         return user;
@@ -105,6 +105,6 @@ class UserService {
     // }
 }
 
-UserService.$inject = ['Countries'];
+UserService.$inject = ['CountriesService'];
 
-usersApp.service('User', UserService); // eslint-disable-line no-undef
+usersApp.service('UserService', UserService); // eslint-disable-line no-undef
