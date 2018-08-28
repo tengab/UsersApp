@@ -1,10 +1,12 @@
 class AddUserController {
-    constructor(User, Countries, AddUserService) {
+    constructor(User, Countries, AddUserService, $scope) {
+        this.$scope = $scope;
         this.AddUserService = AddUserService;
         this.Countries = Countries;
         this.User = User;
         this.newUser = this.User.create();
         // this.newUser = this.User.createUser();
+
     }
 
     setGender() {
@@ -33,9 +35,14 @@ class AddUserController {
 
         this.newUser.gender = this.setGender();
 
-        if (this.newUser.name.title && this.newUser.name.first && this.newUser.name.last && this.newUser.age && this.newUser.email !== null && this.newUser.nat !== null) {
+
+        if (this.newUser.name.title && this.newUser.name.first && this.newUser.name.last && this.newUser.age && this.newUser.email !== null && this.newUser.nat !== null && this.newUser.natFullName !== null) {
+
             this.AddUserService.addUser(this.newUser);
             this.newUser = this.User.create();
+            this.touchedForm.$setUntouched();
+            this.touchedForm.$setPristine();
+
         } else {
             alert('Fulfill all required fields');
         }
@@ -43,6 +50,6 @@ class AddUserController {
     }
 }
 
-AddUserController.$inject = ['User', 'Countries', 'AddUserService'];
+AddUserController.$inject = ['User', 'Countries', 'AddUserService', '$scope'];
 
 usersApp.controller('AddUserController', AddUserController);  // eslint-disable-line no-undef

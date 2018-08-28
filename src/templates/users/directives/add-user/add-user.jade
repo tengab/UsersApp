@@ -6,50 +6,57 @@
     .collapse(ng-class="!isAddUserHidden ? 'in' : ''")
         .panel-body
             .row.add-user-form
-                .col-xs-6
-                    div
-                        .form-group
-                            label(for='title') Title (select one):
-                            span  *
-                            select#title.form-control(ng-model='$ctrl.newUser.name.title')
-                                option(value='' selected disabled) Please select
-                                option Mister
-                                option Mr
-                                option Miss
-                                option Mrs
-                        .form-group
-                            label(for='gender') Gender:
-                            input#gender.form-control(type='text' disabled ng-value='$ctrl.setGender()' placeholder="User's gender")
-                        .form-group
-                            label(for='first-name') First Name:
-                            span.star-text  *
-                            input#first-name.form-control(type='text' ng-model='$ctrl.newUser.name.first' placeholder="Type user's first name")
-                        .form-group
-                            label(for='last-name') Last Name:
-                            span.star-text  *
-                            input#last-name.form-control(type='text' ng-model='$ctrl.newUser.name.last' placeholder="Type user's last name")
-                .col-xs-6
-                    div
-                        .form-group
-                            label(for='age') Your age:
-                            span.star-text  *
-                            input#age.form-control(type='number' ng-model='$ctrl.newUser.age' placeholder="Type user's age")
-                        .form-group
-                            label(for='e-mail') E-mail:
-                            span.star-text  *
-                            input#e-mail.form-control(type='email' ng-model='$ctrl.newUser.email' placeholder='e.g. user@example.com')
-                        .form-group
-                            label(for='nationality') Nationality (select one):
-                            span.star-text  *
-                            select#nationality.form-control(ng-model='$ctrl.newUser.nat')
-                                option(value='' selected disabled) Please select
-                                option(ng-repeat='country in $ctrl.Countries.definedCountriesForDatabaseSearch' value='{{country}}') {{$ctrl.Countries.getCountryFullName(country)}}
-                                option OTHER
-                        .form-group(ng-class="($ctrl.newUser.nat === null || $ctrl.newUser.nat !== 'OTHER') ? 'hide-other-nationality' : '' ")
-                            label(for='other-nationality') Nationality:
-                            span.star-text  *
-                            input#other-nationality.form-control(type='text' ng-model='$ctrl.newUser.natFullName' placeholder="Type user's Nationality")
-
+                form#touchedForm(name="$ctrl.touchedForm")
+                    .col-xs-6
+                         label(for='title') Title (select one):
+                         span  *
+                         .correct-validation
+                             select#title.form-control(ng-model='$ctrl.newUser.name.title' required)
+                                 option(value='' selected disabled) Please select
+                                 option Mister
+                                 option Mr
+                                 option Miss
+                                 option Mrs
+                             span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.name.title != null && $ctrl.newUser.name.title !== ''}")
+                         label(for='gender') Gender:
+                         .correct-validation
+                             input#gender.form-control(type='text' disabled ng-value='$ctrl.setGender()' placeholder="User's gender" required)
+                             span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.name.title != null && $ctrl.newUser.name.title !== ''}")
+                         label(for='first-name') First Name:
+                         span.star-text  *
+                         .correct-validation
+                             input#first-name.form-control(type='text' ng-model='$ctrl.newUser.name.first' name="fn" placeholder="Type user's first name" required)
+                             span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.name.first != null && $ctrl.newUser.name.first !== ''}")
+                         label(for='last-name') Last Name:
+                         span.star-text  *
+                         .correct-validation
+                             input#last-name.form-control(type='text' ng-model='$ctrl.newUser.name.last' placeholder="Type user's last name" required )
+                             span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.name.last != null && $ctrl.newUser.name.last !== ''}")
+                    .col-xs-6
+                         label(for='age') Your age:
+                         span.star-text  *
+                         .correct-validation
+                             input#age.form-control(type='number' ng-model='$ctrl.newUser.age' placeholder="Type user's age" required)
+                             span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.age != null && $ctrl.newUser.age !== ''}")
+                         label(for='e-mail') E-mail:
+                         span.star-text  *
+                         .correct-validation
+                             input#e-mail.form-control(type='email' ng-model='$ctrl.newUser.email' placeholder='e.g. user@example.com' required)
+                             span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.email != null && $ctrl.newUser.email !== ''}")
+                         label(for='nationality') Nationality (select one):
+                         span.star-text  *
+                         .correct-validation
+                             select#nationality.form-control(ng-model='$ctrl.newUser.nat' required)
+                                 option(value='' selected disabled) Please select
+                                 option(ng-repeat='country in $ctrl.Countries.definedCountriesForDatabaseSearch' value='{{country}}') {{$ctrl.Countries.getCountryFullName(country)}}
+                                 option OTHER
+                             span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.nat != null && $ctrl.newUser.nat !== ''}")
+                         div(ng-cloak ng-class="($ctrl.newUser.nat === null || $ctrl.newUser.nat !== 'OTHER') ? 'hide-other-nationality' : ''" )
+                             label(for='other-nationality') Nationality:
+                             span.star-text  *
+                             .correct-validation
+                                 input#other-nationality.form-control(type='text' ng-model='$ctrl.newUser.natFullName' placeholder="Type user's Nationality" required)
+                                 span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.natFullName != null && $ctrl.newUser.natFullName !== ''}")
             sup
                 small.star-text * Field required
-            button.btn.btn-primary.btn-block(type="submit" ng-click='$ctrl.userAddForm()') Add user
+            button.btn.btn-primary.btn-block(type="button" ng-click='$ctrl.userAddForm()') Add user
