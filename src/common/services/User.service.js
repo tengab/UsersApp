@@ -29,6 +29,7 @@ class UserService {
             state: null,
             postcode: null
         };
+        this.addStatus = 'addedManually';
     }
 
     create() {
@@ -46,63 +47,27 @@ class UserService {
             large: backendUser.picture.large
         };
         user.name = {
-            first: backendUser.name.first.capitalize(),
-            last: backendUser.name.last.capitalize(),
-            title: backendUser.name.title.capitalize()
+            first: _.startCase(backendUser.name.first),
+            last: _.startCase(backendUser.name.last),
+            title: _.startCase(backendUser.name.title)
         };
         user.location = {
             coordinates: {
                 latitude: backendUser.location.coordinates.latitude,
                 longitude: backendUser.location.coordinates.longitude
             },
-            street: backendUser.location.street.capitalize(),
-            city: backendUser.location.city.capitalize(),
-            state: backendUser.location.state.capitalize(),
+            street: _.startCase(backendUser.location.street),
+            city: _.startCase(backendUser.location.city),
+            state: _.startCase(backendUser.location.state),
             postcode: backendUser.location.postcode
         };
         user.nat = backendUser.nat;
         user.natFullName = this.Countries.getCountryFullName(backendUser.nat);
         user.phone = backendUser.phone;
+        user.addStatus = 'fetchedFromApi';
 
         return user;
     }
-
-    // createUser(
-    //     thumbnail,
-    //     largePicture,
-    //     firstName,
-    //     lastName,
-    //     title,
-    //     latitude,
-    //     longitude,
-    //     age,
-    //     gender,
-    //     id,
-    //     email,
-    // ) {
-    //     return {
-    //         picture: {
-    //             thumbnail,
-    //             large: largePicture
-    //         },
-    //         name: {
-    //             first: firstName.capitalize(),
-    //             last: lastName.capitalize(),
-    //             title: title.capitalize()
-    //         },
-    //         location: {
-    //             coordinates: {
-    //                 latitude,
-    //                 longitude
-    //             }
-    //         },
-    //         age,
-    //         gender,
-    //         id,
-    //         email
-    //     };
-    //     // return this.newUser;
-    // }
 }
 
 UserService.$inject = ['Countries'];

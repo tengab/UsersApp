@@ -1,0 +1,31 @@
+#user-info
+    .panel.panel-default
+        .panel-heading.heading-to-hide
+            h3.panel-title
+                strong User info
+            button.glyphicon(ng-class="$ctrl.isInfoHidden ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'" ng-click="$ctrl.isInfoHidden = !$ctrl.isInfoHidden")
+        .collapse(ng-class="$ctrl.isInfoHidden ? 'in' : ''")
+            .panel-body
+                .row.customized-position
+                    .col-xs-3.row-custom-photo
+                        img(src='{{$ctrl.fetchedUser.picture.large}}')
+                    .col-xs-5.row-custom-details
+                        div
+                            h3
+                                strong {{$ctrl.fetchedUser.name.title}} {{$ctrl.fetchedUser.name.first}} {{$ctrl.fetchedUser.name.last}}
+                            div
+                            strong gender:
+                            span {{$ctrl.fetchedUser.gender === 'male' ? ' &#9794' : $ctrl.fetchedUser.gender === 'female' ? ' &#9792' : '' }}
+                            div
+                            strong email: &nbsp
+                            span {{ $ctrl.fetchedUser.email }}
+                            div
+                            strong nationality: &nbsp
+                            span {{$ctrl.fetchedUser.natFullName}}
+                    .col-xs-4.row-custom-searchButton
+                        button.btn.btn-info(ng-click="$ctrl.searchForFriends()" onclick="this.disabled=true" ng-disabled="$ctrl.fetchedUser.nat === 'OTHER'")
+                            span Search
+                            br
+                            span for
+                            br
+                            span friends

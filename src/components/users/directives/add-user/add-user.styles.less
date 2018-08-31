@@ -1,0 +1,40 @@
+#add-user {
+  select option[disabled]:first-child {
+    display: none;
+  }
+
+  .star-text {
+    color: red
+  }
+
+  .form-group {
+    label::after {
+      content: " *";
+      color: red;
+    }
+  }
+
+  .hide-other-nationality {
+    visibility: hidden;
+  }
+
+  .correct-validation {
+    input, select {
+      float: left;
+      display: block;
+      width: 95%;
+    }
+    span {
+      float: left;
+      display: block;
+      width: 5%;
+      font-size: 1.5em;
+      color: green
+    }
+  }
+
+  sup {
+    color: red;
+  }
+
+}

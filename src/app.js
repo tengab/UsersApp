@@ -2,10 +2,6 @@ const usersApp = angular.module('usersApp', ['ui.router', 'ui.grid', 'ui.grid.au
 
 usersApp.config(['$stateProvider', function($stateProvider) {
 
-    String.prototype.capitalize = function() {
-        return this.toLowerCase().replace( /\b./g, firstLetter => (firstLetter.toUpperCase()));
-    };
-
     $stateProvider
         .state({
             name: 'users',
@@ -15,7 +11,7 @@ usersApp.config(['$stateProvider', function($stateProvider) {
         .state({
             name: 'user-details',
             url: '/user-details/{id}',
-            templateUrl: 'user-details/user-details.html',
+            templateUrl: 'user-details/user-details.MAIN/user-details.html',
             controller: 'UserDetailsController',
             controllerAs: '$ctrl'
         });

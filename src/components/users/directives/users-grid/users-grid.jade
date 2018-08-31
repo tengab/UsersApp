@@ -1,0 +1,6 @@
+.panel.panel-default
+    .panel-heading.heading-to-hide
+        h3.panel-title
+            strong Users
+        button.glyphicon(ng-class="$ctrl.isGridHidden ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'" ng-click="$ctrl.isGridHidden = !$ctrl.isGridHidden")
+    #grid1.grid.collapse(ng-class="$ctrl.isGridHidden ? 'in' : ''" ui-grid="$ctrl.gridOptions" ui-grid-auto-resize ui-grid-grouping)

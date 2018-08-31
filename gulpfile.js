@@ -25,7 +25,7 @@ gulp.task('less', () => {
 });
 
 gulp.task('jade', buildHTML = () => {
-    gulp.src('./src/templates/**/*.jade')
+    gulp.src('./src/components/**/*.jade')
         .pipe(jade({
             doctype: 'html',
             pretty: false
@@ -36,22 +36,22 @@ gulp.task('jade', buildHTML = () => {
         }));
 });
 
-gulp.task('babel', () => {
-    gulp.src('./src/**/*.js')
-        .pipe(concat('scripts_es6.js'))
-        .pipe(babel({
-            presets: ['es2015']
-        }))
-        .pipe(gulp.dest('./dist/js/'))
+gulp.task('js', () => {
+    gulp.src(scripts)
+        .pipe(concat('vendor.js'))
+        .pipe(gulp.dest('./dist/js'))
         .pipe(browserSync.reload({
             stream: true
         }));
 });
 
-gulp.task('js', () => {
-    gulp.src(scripts)
+gulp.task('babel', () => {
+    gulp.src('./src/**/*.js')
         .pipe(concat('scripts.js'))
-        .pipe(gulp.dest('./dist/js'))
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(gulp.dest('./dist/js/'))
         .pipe(browserSync.reload({
             stream: true
         }));
@@ -72,9 +72,8 @@ gulp.task('browser-sync', () => {
 
 gulp.task('start', () => {
     gulp.start(['build', 'browser-sync']);
-    gulp.watch(['./src/images/*'], ['images']);
-    gulp.watch(['./src/less/**/*.less'], ['less']);
-    gulp.watch(['./src/templates/**/*.jade'], ['jade']);
+    gulp.watch(['./src/common/images/*'], ['images']);
+    gulp.watch(['./src/**/*.less'], ['less']);
+    gulp.watch(['./src/**/*.jade'], ['jade']);
     gulp.watch(['./src/**/*.js'], ['babel']);
-    gulp.watch(['./src/js_es6/**/*.js'], ['babel']);
 });

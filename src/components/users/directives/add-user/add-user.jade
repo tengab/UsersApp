@@ -1,0 +1,62 @@
+#add-user
+    .panel.panel-default
+        .panel-heading.heading-to-hide
+            h3.panel-title
+                strong Add User
+            button.glyphicon(ng-class="$ctrl.isAddUserHidden ? 'glyphicon-chevron-up' : 'glyphicon-chevron-down'" ng-click="$ctrl.isAddUserHidden = !$ctrl.isAddUserHidden")
+        .collapse(ng-class="$ctrl.isAddUserHidden ? 'in' : ''")
+            .panel-body
+                .row.add-user-form
+                    .col-xs-6
+                        .form-group
+                            label(for='title') Title (select one):
+                            .correct-validation
+                                select#title.form-control(ng-model='$ctrl.newUser.name.title' required)
+                                    option(value='' selected disabled) Please select
+                                    option Mister
+                                    option Mr
+                                    option Miss
+                                    option Mrs
+                                span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.name.title != null && $ctrl.newUser.name.title !== ''}")
+
+                            label(for='gender') Gender:
+                            .correct-validation
+                                input#gender.form-control(type='text' disabled ng-value='$ctrl.setGender()' placeholder="User's gender" required)
+                                span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.name.title != null && $ctrl.newUser.name.title !== ''}")
+
+                            label(for='first-name') First Name:
+                            .correct-validation
+                                input#first-name.form-control(type='text' ng-model='$ctrl.newUser.name.first' name="fn" placeholder="Type user's first name" required)
+                                span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.name.first != null && $ctrl.newUser.name.first !== ''}")
+
+                            label(for='last-name') Last Name:
+                            .correct-validation
+                                input#last-name.form-control(type='text' ng-model='$ctrl.newUser.name.last' placeholder="Type user's last name" required )
+                                span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.name.last != null && $ctrl.newUser.name.last !== ''}")
+                    .col-xs-6
+                        .form-group
+                            label(for='age') Your age:
+                            .correct-validation
+                                input#age.form-control(type='number' ng-model='$ctrl.newUser.age' placeholder="Type user's age" required)
+                                span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.age != null && $ctrl.newUser.age !== ''}")
+
+                            label(for='e-mail') E-mail:
+                            .correct-validation
+                                input#e-mail.form-control(type='email' ng-model='$ctrl.newUser.email' placeholder='e.g. user@example.com' required)
+                                span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.email != null && $ctrl.newUser.email !== ''}")
+
+                            label(for='nationality') Nationality (select one):
+                            .correct-validation
+                                select#nationality.form-control(ng-model='$ctrl.newUser.nat' required)
+                                    option(value='' selected disabled) Please select
+                                    option(ng-repeat='countryCode in $ctrl.Countries.definedCountriesForDatabaseSearch' value='{{countryCode}}') {{$ctrl.setCountryFullName(countryCode)}}
+                                    option OTHER
+                                span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.nat != null && $ctrl.newUser.nat !== ''}")
+
+                            div(ng-cloak ng-class="($ctrl.newUser.nat === null || $ctrl.newUser.nat !== 'OTHER') ? 'hide-other-nationality' : ''" )
+                                label(for='other-nationality') Nationality:
+                                .correct-validation
+                                    input#other-nationality.form-control(type='text' ng-model='$ctrl.newUser.natFullName' placeholder="Type user's Nationality" required)
+                                    span.glyphicon(ng-class="{'glyphicon-ok': $ctrl.newUser.natFullName != null && $ctrl.newUser.natFullName !== ''}")
+                sup * Field required
+                button.btn.btn-primary.btn-block(type="button" ng-click='$ctrl.userAddForm()') Add user
