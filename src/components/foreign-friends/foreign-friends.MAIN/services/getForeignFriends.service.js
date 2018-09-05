@@ -8,7 +8,7 @@ class GetForeignFriendsService {
 
     getForeignFriends(nationality, fetchedUser) {
 
-        this.$http.get(`https://randomuser.me/api/?results=30&nat=${nationality}&gender=male`)
+        this.$http.get(`https://randomuser.me/api/?results=30&nat=${nationality}`)
             .then((response) => {
                 this.foreignFriendsList.push({
                     groupName: nationality,
