@@ -24,8 +24,14 @@
                             span {{$ctrl.fetchedUser.natFullName}}
                     .col-xs-4.row-custom-searchButton
                         button.btn.btn-info(ng-click="$ctrl.searchForFriends()" onclick="this.disabled=true" ng-disabled="$ctrl.fetchedUser.nat === 'OTHER'")
-                            span Search
+                            | Search for
                             br
-                            span for
+                            | national
                             br
-                            span friends
+                            | friends
+                        button.btn.btn-info(ui-sref="foreign-friends({id: $ctrl.fetchedUser.id})")
+                            | Search for
+                            br
+                            | foreign
+                            br
+                            | friends

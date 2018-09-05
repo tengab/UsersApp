@@ -108,7 +108,7 @@ class CountriesService {
             IS: 'Iceland',
             IN: 'India',
             ID: 'Indonesia',
-            IR: 'Iran, Islamic Republic Of',
+            IR: 'Iran',
             IQ: 'Iraq',
             IE: 'Ireland',
             IM: 'Isle Of Man',
@@ -252,6 +252,7 @@ class CountriesService {
             ZM: 'Zambia',
             ZW: 'Zimbabwe'
         };
+
         for (const country in nationalities) {
             if (country === nationalityCode) {
                 return nationalities[country];

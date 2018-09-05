@@ -1,0 +1,22 @@
+md-dialog
+    md-dialog-content
+        table.table
+            tbody
+                tr
+                    th
+                    th #
+                    th First name
+                    th Last name
+                    th Nationality
+                tr.table-row-custom(ng-repeat='twin in $ctrl.GetForeignFriendsService.twins')
+                    td
+                        input(type='radio' name='twinRadio' ng-value='twin' ng-model='$ctrl.selectedTwin')
+                    td {{$index + 1}}
+                    td {{twin.name.first}}
+                    td {{twin.name.last}}
+                    td {{twin.natFullName}}
+    md-dialog-actions.action-buttons
+        button.btn.btn-warning(ng-click='$ctrl.closeDialog(); $ctrl.showDialogOfSelectedTwin($ctrl.selectedTwin);' ng-disabled="!$ctrl.selectedTwin")
+            | Show selected twin
+        button.btn.btn-warning(ng-click='$ctrl.closeDialog()')
+            | Close

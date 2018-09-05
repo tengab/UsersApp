@@ -1,0 +1,10 @@
+#foreign-friends
+    a.btn.btn-primary(ui-sref="users") Indietro all'elenco delle persone
+    | &nbsp
+    a.btn.btn-primary(ui-sref="user-details({id: $ctrl.fetchedUser.id})") Indietro alla carta di {{$ctrl.fetchedUser.name.first}} {{$ctrl.fetchedUser.name.last}}
+
+    h1 Foreign friends for {{$ctrl.fetchedUser.name.first}} {{$ctrl.fetchedUser.name.last}}
+
+    user-info(fetched-user="$ctrl.fetchedUser")
+
+    foreign-friends-table(fetched-user="$ctrl.fetchedUser")

@@ -38,7 +38,13 @@ class AddUserController {
 
         this.newUser.gender = this.setGender();
 
-        if (this.newUser.name.title && this.newUser.name.first && this.newUser.name.last && this.newUser.age && this.newUser.email && this.newUser.nat && this.newUser.natFullName !== null) {
+        if (this.newUser.name.title &&
+            this.newUser.name.first &&
+            this.newUser.name.last &&
+            this.newUser.age &&
+            this.newUser.email &&
+            this.newUser.nat &&
+            this.newUser.natFullName !== null) {
             this.UserListContainerService.addUser(this.newUser);
             this.newUser = this.User.create();
         } else {

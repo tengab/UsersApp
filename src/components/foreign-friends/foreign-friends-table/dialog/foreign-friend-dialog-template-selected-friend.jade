@@ -1,0 +1,18 @@
+md-dialog
+    md-dialog-content
+        .panel.panel-info
+            .panel-body.dialog-container
+                .picture
+                    img(ng-src='{{$ctrl.selectedFriend.picture.large}}')
+                h3 {{$ctrl.selectedFriend.name.title}} {{$ctrl.selectedFriend.name.first}} {{$ctrl.selectedFriend.name.last}}
+                h5 Street: {{$ctrl.selectedFriend.location.street}}
+                h5 City: {{$ctrl.selectedFriend.location.city}}
+                h5 State: {{$ctrl.selectedFriend.location.state}}
+                h5 Postcode: {{$ctrl.selectedFriend.location.postcode}}
+                h5 Country: {{$ctrl.selectedFriend.natFullName}}
+                hr
+                h5 Phone number: {{$ctrl.selectedFriend.phone}}
+                h5 E-mail: {{$ctrl.selectedFriend.email}}
+    md-dialog-actions
+        button.btn.btn-warning(ng-click='$ctrl.closeDialog()')
+            | Close

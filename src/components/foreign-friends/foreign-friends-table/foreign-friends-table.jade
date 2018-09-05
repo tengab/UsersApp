@@ -1,0 +1,26 @@
+#foreign-friends-table
+    .panel.panel-default
+        .panel-heading.titles
+            h3.panel-title
+                strong Suggested friends from random countries around the world
+            button.btn.btn-primary(ng-click="$ctrl.searchForeignFriends()")
+                | Show more suggested friends
+            br
+            button.btn.btn-warning(ng-click="$ctrl.showDialogWithTwins()" ng-disabled="!$ctrl.GetForeignFriendsService.twins.length")
+                | List of {{$ctrl.fetchedUser.name.first}}'s potential twins &nbsp
+                span.badge {{$ctrl.GetForeignFriendsService.twins.length}}
+        .panel-body
+            div.country-labels-container
+                | See list from:
+                .label.label-info(ng-repeat="group in $ctrl.GetForeignFriendsService.foreignFriendsList" ng-click="$ctrl.goToAnchor($index)") {{$ctrl.setCountryFullName(group.groupName)}}
+            br
+            div.foreign-friends-view
+                .col-xs-4(ng-repeat="group in $ctrl.GetForeignFriendsService.foreignFriendsList")
+                    .panel.panel-warning.anchor(id="{{$index}}")
+                        .panel-heading.titles
+                            strong {{$ctrl.setCountryFullName(group.groupName)}}
+                        div.list-group
+                            a.list-group-item(ng-repeat="friend in group.friends"
+                            ng-click='$ctrl.showDialogOfPotentialFriend(friend)')
+                                img.from-foreign-group(ng-src="{{friend.picture.thumbnail}}")
+                                span &nbsp {{friend.name.first}} {{friend.name.last}}

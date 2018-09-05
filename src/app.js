@@ -14,6 +14,13 @@ usersApp.config(['$stateProvider', function($stateProvider) {
             templateUrl: 'user-details/user-details.MAIN/user-details.html',
             controller: 'UserDetailsController',
             controllerAs: '$ctrl'
+        })
+        .state({
+            name: 'foreign-friends',
+            url: '/user-details/{id}/foreign-friends',
+            templateUrl: 'foreign-friends/foreign-friends.MAIN/foreign-friends.html',
+            controller: 'ForeignFriendsController',
+            controllerAs: '$ctrl'
         });
 }
 ]);

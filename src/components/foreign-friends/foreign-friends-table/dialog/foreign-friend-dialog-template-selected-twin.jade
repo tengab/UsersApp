@@ -1,0 +1,20 @@
+md-dialog
+    md-dialog-content
+        .panel.panel-info
+            .panel-body.dialog-container
+                .picture
+                    img(ng-src='{{$ctrl.selectedTwin.picture.large}}')
+                h3 {{$ctrl.selectedTwin.name.title}} {{$ctrl.selectedTwin.name.first}} {{$ctrl.selectedTwin.name.last}}
+                h5 Street: {{$ctrl.selectedTwin.location.street}}
+                h5 City: {{$ctrl.selectedTwin.location.city}}
+                h5 State: {{$ctrl.selectedTwin.location.state}}
+                h5 Postcode: {{$ctrl.selectedTwin.location.postcode}}
+                h5 Country: {{$ctrl.selectedTwin.natFullName}}
+                hr
+                h5 Phone number: {{$ctrl.selectedTwin.phone}}
+                h5 E-mail: {{$ctrl.selectedTwin.email}}
+    md-dialog-actions.action-buttons
+        buttin.btn.btn-warning(ng-click='$ctrl.closeDialog(); $ctrl.showDialogWithTwins();')
+            | Back to twin's list
+        button.btn.btn-warning(ng-click='$ctrl.closeDialog()')
+            | Close
