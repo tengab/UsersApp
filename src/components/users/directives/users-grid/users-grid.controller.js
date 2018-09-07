@@ -1,13 +1,15 @@
 class UsersGridController {
-    constructor(uiGridConstants, UserListContainerService, GetForeignFriendsService, RandomCountriesList, Countries) {
+    constructor(uiGridConstants, UserListContainerService, GetForeignFriendsService, RandomCountriesList, Countries, SelectedForeignFriendsService) {
         this.uiGridConstants = uiGridConstants;
         this.UserListContainerService = UserListContainerService;
         this.GetForeignFriendsService = GetForeignFriendsService;
         this.RandomCountriesList = RandomCountriesList;
         this.Countries = Countries;
+        this.SelectedForeignFriendsService = SelectedForeignFriendsService
 
         this.GetForeignFriendsService.foreignFriendsList = [];
         this.RandomCountriesList.countriesForFriendsSuggestions = [].concat(this.Countries.definedCountriesForDatabaseSearch);
+        this.SelectedForeignFriendsService.FavouriteFriends = [];
 
         this.initGridOptions();
         if (!this.UserListContainerService.usersList.length) {
@@ -75,6 +77,6 @@ class UsersGridController {
 
 }
 
-UsersGridController.$inject = ['uiGridConstants', 'UserListContainerService', 'GetForeignFriendsService', 'RandomCountriesList', 'Countries'];
+UsersGridController.$inject = ['uiGridConstants', 'UserListContainerService', 'GetForeignFriendsService', 'RandomCountriesList', 'Countries', 'SelectedForeignFriendsService'];
 
 usersApp.controller('UsersGridController', UsersGridController);  // eslint-disable-line no-undef

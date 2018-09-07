@@ -1,10 +1,11 @@
 class ForeignFriendsTableController {
-    constructor(Countries, $mdDialog, RandomCountriesList, GetForeignFriendsService, $location) {
+    constructor(Countries, $mdDialog, RandomCountriesList, GetForeignFriendsService, $location, SelectedForeignFriendsService) {
         this.Countries = Countries;
         this.$mdDialog = $mdDialog;
         this.RandomCountriesList = RandomCountriesList;
         this.GetForeignFriendsService = GetForeignFriendsService;
         this.$location = $location;
+        this.SelectedForeignFriendsService = SelectedForeignFriendsService;
 
         if (!this.GetForeignFriendsService.foreignFriendsList.length) {
             this.searchForeignFriends();
@@ -12,7 +13,19 @@ class ForeignFriendsTableController {
         this.selectedFriend = null;
         this.selectedTwin = null;
         this.twins = this.GetForeignFriendsService.twins;
+
+
+
     }
+
+    setFavouriteFriendsList(friend) {
+        this.SelectedForeignFriendsService.addToFavouriteFriends(friend);
+    }
+
+    isFavouriteFriendChecked(friendsId) {
+        return this.SelectedForeignFriendsService.isChecked(friendsId);
+    }
+
 
     searchForeignFriends() {
         this.RandomCountriesList.getRandomCountriesList(this.fetchedUser);
@@ -54,12 +67,11 @@ class ForeignFriendsTableController {
     }
 
     goToAnchor(groupName) {
-        // this.$location.hash() !== `anchor${groupName}` ?
         this.$location.hash(groupName);
-        // : this.$anchorScroll();
+        event.preventDefault();
     }
 }
 
-ForeignFriendsTableController.$inject = ['Countries', '$mdDialog', 'RandomCountriesList', 'GetForeignFriendsService', '$location'];
+ForeignFriendsTableController.$inject = ['Countries', '$mdDialog', 'RandomCountriesList', 'GetForeignFriendsService', '$location', 'SelectedForeignFriendsService'];
 
 usersApp.controller('ForeignFriendsTableController', ForeignFriendsTableController);  // eslint-disable-line no-undef
