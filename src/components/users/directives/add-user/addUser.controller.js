@@ -38,6 +38,8 @@ class AddUserController {
 
         this.newUser.gender = this.setGender();
 
+        this.newUser.friends.countriesForFriendsSuggestions = [].concat(this.Countries.definedCountriesForDatabaseSearch);
+
         if (this.newUser.name.title &&
             this.newUser.name.first &&
             this.newUser.name.last &&

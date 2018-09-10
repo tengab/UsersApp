@@ -3,26 +3,26 @@
         .panel-heading.titles
             h3.panel-title
                 strong Suggested friends from random countries around the world
-            button.btn.btn-primary(ng-click="$ctrl.searchForeignFriends()" ng-disabled='!$ctrl.RandomCountriesList.countriesForFriendsSuggestions.length')
+            button.btn.btn-primary(ng-click="$ctrl.searchForeignFriends()" ng-disabled='!$ctrl.fetchedUser.friends.countriesForFriendsSuggestions.length')
                 | Show more suggested friends
             br
-            button.btn.btn-warning(ng-click="$ctrl.showDialogWithTwins()" ng-disabled="!$ctrl.GetForeignFriendsService.twins.length")
+            button.btn.btn-warning(ng-click="$ctrl.showDialogWithTwins()" ng-disabled="!$ctrl.fetchedUser.friends.twins.length")
                 | List of {{$ctrl.fetchedUser.name.first}}'s potential twins &nbsp
-                span.badge {{$ctrl.GetForeignFriendsService.twins.length}}
+                span.badge {{$ctrl.fetchedUser.friends.twins.length}}
         .panel-body
             div Favourite friends:
                 ul.list-unstyled
-                    li(ng-repeat='favFriend in $ctrl.SelectedForeignFriendsService.FavouriteFriends')
+                    li(ng-repeat='favFriend in $ctrl.fetchedUser.friends.favouriteFriends')
                         .label.label-default(ng-click='$ctrl.showDialogOfPotentialFriend(favFriend)')
                             |{{favFriend.name.first}} {{favFriend.name.last}} from {{favFriend.natFullName}} &nbsp
                             .glyphicon.glyphicon-remove(ng-click='$event.stopPropagation(); $ctrl.setFavouriteFriendsList(favFriend);')
             .country-labels-container
                 | See list from:
-                .label.label-info(ng-repeat="group in $ctrl.GetForeignFriendsService.foreignFriendsList" ng-click="$ctrl.goToAnchor($index);") {{$ctrl.setCountryFullName(group.groupName)}}
+                .label.label-info(ng-repeat="group in $ctrl.fetchedUser.friends.foreignFriends" ng-click="$ctrl.goToAnchor(group.groupName);") {{$ctrl.setCountryFullName(group.groupName)}}
             br
             .foreign-friends-view
-                .col-xs-4(ng-repeat="group in $ctrl.GetForeignFriendsService.foreignFriendsList")
-                    .panel.panel-warning.anchor(id="{{$index}}")
+                .col-xs-4(ng-repeat="group in $ctrl.fetchedUser.friends.foreignFriends")
+                    .panel.panel-warning.anchor(id="{{group.groupName}}")
                         .panel-heading.titles
                             strong {{$ctrl.setCountryFullName(group.groupName)}}
                         .list-group
@@ -35,4 +35,6 @@
                                     ng-click='$event.stopPropagation(); $ctrl.setFavouriteFriendsList(friend);'
                                     )
                                     img.from-foreign-group(ng-src="{{friend.picture.thumbnail}}")
-                                    span &nbsp {{friend.name.first}} {{friend.name.last}}
+                                    span &nbsp {{friend.name.first}} {{friend.name.last}} &nbsp
+                                    span.glyphicon(ng-class="friend.friends.isTwin ? 'glyphicon-resize-horizontal' : ''")
+                                    span.glyphicon(ng-class="friend.friends.isTwin ? 'glyphicon-user' : ''")

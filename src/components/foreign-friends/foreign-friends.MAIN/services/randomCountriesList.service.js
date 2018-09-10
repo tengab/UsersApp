@@ -2,17 +2,17 @@ class RandomCountriesList {
     constructor(Countries, GetForeignFriendsService) {
         this.Countries = Countries;
         this.GetForeignFriendsService = GetForeignFriendsService;
-        this.countriesForFriendsSuggestions = [].concat(this.Countries.definedCountriesForDatabaseSearch);
-        this.randomCountries = [];
+        // this.countriesForFriendsSuggestions = [].concat(this.Countries.definedCountriesForDatabaseSearch);
+        // this.randomCountries = [];
     }
 
     getRandomCountriesList(fetchedUser) {
 
-        this.randomCountries = (_.sampleSize(this.countriesForFriendsSuggestions, 3));
+        const randomCountries = (_.sampleSize(fetchedUser.friends.countriesForFriendsSuggestions, 3));
 
-        this.randomCountries.map((countryCode) => {
+        randomCountries.map((countryCode) => {
             this.GetForeignFriendsService.getForeignFriends(countryCode, fetchedUser);
-            return _.remove(this.countriesForFriendsSuggestions, country => (country === countryCode));
+            return _.remove(fetchedUser.friends.countriesForFriendsSuggestions, country => (country === countryCode));
         });
     }
 }

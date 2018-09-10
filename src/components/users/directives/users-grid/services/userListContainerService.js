@@ -6,7 +6,6 @@ class UserListContainerService {
     }
 
     getUsers() {
-
         return this.$http.get('https://randomuser.me/api/?results=7&seed=a')
             .then((response) => {
                 this.usersList = response.data.results.map(user => this.User.mapUser(user));

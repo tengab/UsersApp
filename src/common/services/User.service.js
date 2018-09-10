@@ -30,7 +30,13 @@ class UserService {
             postcode: null
         };
         this.addStatus = 'addedManually';
+        this.friends = {
+            foreignFriends: [],
+            twins: [],
+            favouriteFriends: []
+        };
     }
+
 
     create() {
         return new UserService();
@@ -65,6 +71,12 @@ class UserService {
         user.natFullName = this.Countries.getCountryFullName(backendUser.nat);
         user.phone = backendUser.phone;
         user.addStatus = 'fetchedFromApi';
+        user.friends = {
+            foreignFriends: [],
+            twins: [],
+            countriesForFriendsSuggestions: [].concat(this.Countries.definedCountriesForDatabaseSearch),
+            favouriteFriends: []
+        };
 
         return user;
     }

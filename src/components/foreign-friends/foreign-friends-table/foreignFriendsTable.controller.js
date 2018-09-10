@@ -7,25 +7,22 @@ class ForeignFriendsTableController {
         this.$location = $location;
         this.SelectedForeignFriendsService = SelectedForeignFriendsService;
 
-        if (!this.GetForeignFriendsService.foreignFriendsList.length) {
+        if (!this.fetchedUser.friends.foreignFriends.length) {
             this.searchForeignFriends();
         }
+
         this.selectedFriend = null;
         this.selectedTwin = null;
         this.twins = this.GetForeignFriendsService.twins;
-
-
-
     }
 
     setFavouriteFriendsList(friend) {
-        this.SelectedForeignFriendsService.addToFavouriteFriends(friend);
+        this.SelectedForeignFriendsService.addToFavouriteFriends(this.fetchedUser, friend);
     }
 
     isFavouriteFriendChecked(friendsId) {
-        return this.SelectedForeignFriendsService.isChecked(friendsId);
+        return this.SelectedForeignFriendsService.isChecked(this.fetchedUser, friendsId);
     }
-
 
     searchForeignFriends() {
         this.RandomCountriesList.getRandomCountriesList(this.fetchedUser);
@@ -68,7 +65,6 @@ class ForeignFriendsTableController {
 
     goToAnchor(groupName) {
         this.$location.hash(groupName);
-        event.preventDefault();
     }
 }
 

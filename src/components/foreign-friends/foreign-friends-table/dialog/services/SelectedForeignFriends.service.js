@@ -1,20 +1,18 @@
 class SelectedForeignFriendsService {
 
     constructor() {
-        this.FavouriteFriends = [];
     }
 
-    addToFavouriteFriends(friend) {
-        if (_.find(this.FavouriteFriends, friendFromList => (friendFromList.id === friend.id))) {
-            _.remove(this.FavouriteFriends, friendFromList => (friendFromList.id === friend.id));
+    addToFavouriteFriends(fetchedUser, friend) {
+        if (_.find(fetchedUser.friends.favouriteFriends, friendFromList => (friendFromList.id === friend.id))) {
+            _.remove(fetchedUser.friends.favouriteFriends, friendFromList => (friendFromList.id === friend.id));
         } else {
-            friend.isFavourite = true;
-            this.FavouriteFriends.push(friend);
+            fetchedUser.friends.favouriteFriends.push(friend);
         }
     }
 
-    isChecked(friendsId) {
-        if (_.find(this.FavouriteFriends, friendFromList => (friendFromList.id === friendsId))) {
+    isChecked(fetchedUser, friendsId) {
+        if (_.find(fetchedUser.friends.favouriteFriends, friendFromList => (friendFromList.id === friendsId))) {
             return true;
         }
     }
