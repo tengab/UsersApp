@@ -25,7 +25,6 @@ class UsersGridController {
             columnDefs: [
                 {
                     field: 'gender',
-                    // grouping: {groupPriority: 0},
                     sort: {priority: 2, direction: 'desc'}
                 },
                 {
@@ -73,13 +72,6 @@ class UsersGridController {
     deleteUser(row) {
         this.UserListContainerService.deleteUser(row.entity.id);
     }
-
-    // editUser(row) {
-    //     // console.log('row', row.entity)
-    //     row.entity.name.first = 'Dupek'
-    //     row.entity.name.last = 'Słupek'
-    //     console.log(this.UserListContainerService.usersList)
-    // }
 
     setCountryFullName(countryCode) {
         return this.Countries.getCountryFullName(countryCode);
