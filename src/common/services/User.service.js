@@ -33,7 +33,8 @@ class UserService {
         this.friends = {
             foreignFriends: [],
             twins: [],
-            favouriteFriends: []
+            favouriteFriends: [],
+            countriesForFriendsSuggestions: []
         };
     }
 

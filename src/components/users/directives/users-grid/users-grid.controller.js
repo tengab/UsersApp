@@ -1,13 +1,16 @@
 class UsersGridController {
-    constructor(uiGridConstants, UserListContainerService) {
+    constructor(uiGridConstants, UserListContainerService, $mdDialog, Countries) {
         this.uiGridConstants = uiGridConstants;
         this.UserListContainerService = UserListContainerService;
+        this.$mdDialog = $mdDialog;
+        this.Countries = Countries;
 
         this.initGridOptions();
         if (!this.UserListContainerService.usersList.length) {
             this.UserListContainerService.getUsers().then(() => (this.gridOptions.data = this.UserListContainerService.usersList));
         }
         this.isGridHidden = true;
+        this.userDataToEdit = null;
     }
 
     initGridOptions() {
@@ -48,9 +51,9 @@ class UsersGridController {
                     field: 'age'
                 },
                 {
-                    name: 'delete user',
+                    name: 'actions',
                     cellClass: 'cell-content',
-                    cellTemplate: 'users/directives/users-grid/cell-templates/delete-button.html'
+                    cellTemplate: 'users/directives/users-grid/cell-templates/action-buttons.html'
                 }
             ],
             data: this.UserListContainerService.usersList,
@@ -63,12 +66,49 @@ class UsersGridController {
         };
     }
 
+    closeDialog() {
+        this.$mdDialog.hide();
+    }
+
     deleteUser(row) {
         this.UserListContainerService.deleteUser(row.entity.id);
     }
 
+    // editUser(row) {
+    //     // console.log('row', row.entity)
+    //     row.entity.name.first = 'Dupek'
+    //     row.entity.name.last = 'Słupek'
+    //     console.log(this.UserListContainerService.usersList)
+    // }
+
+    setCountryFullName(countryCode) {
+        return this.Countries.getCountryFullName(countryCode);
+    }
+
+    setGender() {
+        switch (this.userDataToEdit.name.title) {
+            case 'Mr':
+            case 'Mister':
+                return this.userDataToEdit.gender = 'male';
+            case 'Mrs':
+            case 'Miss':
+                return this.userDataToEdit.gender = 'female';
+            default:
+                return this.userDataToEdit.gender = null;
+        }
+    }
+
+    showDialogEditUserData(row) {
+        this.userDataToEdit = row.entity;
+        this.$mdDialog.show({
+            controller: () => this,
+            controllerAs: '$ctrl',
+            templateUrl: 'users/directives/users-grid/dialog/edit-user-data.html'
+        });
+    }
+
 }
 
-UsersGridController.$inject = ['uiGridConstants', 'UserListContainerService'];
+UsersGridController.$inject = ['uiGridConstants', 'UserListContainerService', '$mdDialog', 'Countries'];
 
 usersApp.controller('UsersGridController', UsersGridController);  // eslint-disable-line no-undef

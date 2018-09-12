@@ -16,7 +16,6 @@ class SelectedForeignFriendsService {
             return true;
         }
     }
-
 }
 
 SelectedForeignFriendsService.$inject = [];

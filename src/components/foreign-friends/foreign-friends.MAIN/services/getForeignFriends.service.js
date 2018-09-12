@@ -24,7 +24,6 @@ class GetForeignFriendsService {
                 }
             });
     }
-
 }
 
 GetForeignFriendsService.$inject = ['$http', 'User'];

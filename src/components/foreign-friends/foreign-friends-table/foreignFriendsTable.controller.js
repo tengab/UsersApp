@@ -16,25 +16,28 @@ class ForeignFriendsTableController {
         this.twins = this.GetForeignFriendsService.twins;
     }
 
-    setFavouriteFriendsList(friend) {
-        this.SelectedForeignFriendsService.addToFavouriteFriends(this.fetchedUser, friend);
+    closeDialog() {
+        this.$mdDialog.hide();
+    }
+
+    goToAnchor(groupName) {
+        this.$location.hash(groupName);
     }
 
     isFavouriteFriendChecked(friendsId) {
         return this.SelectedForeignFriendsService.isChecked(this.fetchedUser, friendsId);
     }
 
-    searchForeignFriends() {
-        this.RandomCountriesList.getRandomCountriesList(this.fetchedUser);
+    setCountryFullName(countryCode) {
+        return this.Countries.getCountryFullName(countryCode);
     }
 
-    showDialogWithTwins() {
-        this.selectedTwin = null;
-        this.$mdDialog.show({
-            controller: () => this,
-            controllerAs: '$ctrl',
-            templateUrl: 'foreign-friends/foreign-friends-table/dialog/foreign-friend-dialog-template-twins-list.html'
-        });
+    setFavouriteFriendsList(friend) {
+        this.SelectedForeignFriendsService.addToFavouriteFriends(this.fetchedUser, friend);
+    }
+
+    searchForeignFriends() {
+        this.RandomCountriesList.getRandomCountriesList(this.fetchedUser);
     }
 
     showDialogOfPotentialFriend(friend) {
@@ -55,16 +58,13 @@ class ForeignFriendsTableController {
         });
     }
 
-    closeDialog() {
-        this.$mdDialog.hide();
-    }
-
-    setCountryFullName(countryCode) {
-        return this.Countries.getCountryFullName(countryCode);
-    }
-
-    goToAnchor(groupName) {
-        this.$location.hash(groupName);
+    showDialogWithTwins() {
+        this.selectedTwin = null;
+        this.$mdDialog.show({
+            controller: () => this,
+            controllerAs: '$ctrl',
+            templateUrl: 'foreign-friends/foreign-friends-table/dialog/foreign-friend-dialog-template-twins-list.html'
+        });
     }
 }
 

@@ -1,0 +1,60 @@
+md-dialog#edit-user
+    md-dialog-content
+        .panel.panel-default
+            .panel-heading.heading-to-hide
+                h3.panel-title
+                    strong Edit user data
+            .panel-body
+                .row.add-user-form
+                    .col-xs-12
+                        .form-group
+                            .input-group
+                                span#title.input-group-addon
+                                    strong Title:
+                                select.form-control(ng-model='$ctrl.userDataToEdit.name.title' required aria-describedby="title")
+                                    option(value='' selected disabled) Please select
+                                    option Mister
+                                    option Mr
+                                    option Miss
+                                    option Mrs
+
+                            .input-group
+                                span#gender.input-group-addon
+                                    strong Gender:
+                                input.form-control(type='text' disabled ng-value='$ctrl.setGender()' placeholder="User's gender" required aria-describedby="gender")
+
+                            .input-group
+                                span#first-name.input-group-addon
+                                    strong First Name:
+                                input.form-control(type='text' ng-model='$ctrl.userDataToEdit.name.first' placeholder="Type user's first name" required aria-describedby="first-name")
+
+                            .input-group
+                                span#last-name.input-group-addon
+                                    strong Last Name:
+                                input.form-control(type='text' ng-model='$ctrl.userDataToEdit.name.last' placeholder="Type user's last name" required aria-describedby="last-name")
+
+                            .input-group
+                                span#age.input-group-addon
+                                    strong Your age:
+                                input.form-control(type='number' ng-model='$ctrl.userDataToEdit.age' placeholder="Type user's age" required aria-describedby="age")
+
+                            .input-group
+                                span#e-mail.input-group-addon
+                                    strong E-mail:
+                                input.form-control(type='email' ng-model='$ctrl.userDataToEdit.email' placeholder='e.g. user@example.com' required aria-describedby="e-mail")
+
+                            .input-group
+                                span#nationality.input-group-addon
+                                    strong Nationality:
+                                select.form-control(ng-model='$ctrl.userDataToEdit.nat' required aria-describedby="nationality")
+                                    option(value='' selected disabled) Please select
+                                    option(ng-repeat='countryCode in $ctrl.Countries.definedCountriesForDatabaseSearch' value='{{countryCode}}') {{$ctrl.setCountryFullName(countryCode)}}
+                                    option OTHER
+
+                            .input-group(ng-cloak ng-class="($ctrl.userDataToEdit.nat === null || $ctrl.userDataToEdit.nat !== 'OTHER') ? 'hide-other-nationality' : ''" )
+                                span#other-nationality.input-group-addon
+                                    strong Nationality:
+                                input.form-control(type='text' ng-model='$ctrl.userDataToEdit.natFullName' placeholder="Type user's Nationality" required aria-describedby="other-nationality")
+    md-dialog-actions
+        button.btn.btn-success.btn-block(ng-click='$ctrl.closeDialog()')
+            | DONE
